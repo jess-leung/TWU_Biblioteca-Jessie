@@ -46,13 +46,13 @@ public class BibliotecaApp {
      * Get user input for menu option
      */
     public void chooseOption(){
-        String userOption="";
+        String userOption="0";
         while(!userOption.equals("Q")) {
             displayMenuOptions();
             try {
                 userOption = helper.getUserInput("Select an option: ");
                 selectOption(userOption);
-            } catch (IOException ex) {
+            } catch (Exception ex){
                 System.out.println("Select a valid option!");
             }
         }
@@ -132,7 +132,11 @@ public class BibliotecaApp {
      * Get user input to return a book
      */
     public void returnBook(){
-
+        try {
+            String userOption = helper.getUserInput("Select a book (id): ");
+            returnBookProcess(Integer.parseInt(userOption));
+        }
+        catch(Exception e){ }
     }
 
     /**

@@ -12,7 +12,7 @@ public class IOHelper {
         System.out.print(prompt + " ");
         BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
         input = is.readLine();
-        if(input.length()==0) return null;
+        if(input.length()==0) return "";
 
         return input;
     }
