@@ -74,7 +74,7 @@ public class BibliotecaTests {
     @Test
     public void testInvalidMenuOption(){
         setUp();
-        library.chooseOption("123");
+        library.selectOption("123");
         assertEquals("Select a valid option!",outContent.toString());
     }
 

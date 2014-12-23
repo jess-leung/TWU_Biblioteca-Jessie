@@ -10,8 +10,8 @@ public class BibliotecaApp {
     /**
      * Method to set welcome message
      */
-    public String welcomeUser(){
-        return "Welcome to Biblioteca";
+    public void welcomeUser(){
+        System.out.print("Welcome to Biblioteca");
     }
 
     /**
@@ -94,7 +94,7 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         BibliotecaApp library = new BibliotecaApp();
-        System.out.println(library.welcomeUser());
+        library.welcomeUser();
         library.displayMenuOptions();
     }
 
