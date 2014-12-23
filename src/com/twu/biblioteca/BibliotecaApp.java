@@ -128,8 +128,22 @@ public class BibliotecaApp {
         }
     }
 
+    /**
+     * Get user input to return a book
+     */
     public void returnBook(){
 
+    }
+
+    /**
+     * Performs the returning a book process
+     * @param bookId
+     */
+    public Book returnBookProcess(int bookId){
+        Book thisBook = library.get(bookId);
+        thisBook.setAvailable();
+        System.out.println("Thank you for returning the book.");
+        return thisBook;
     }
 
     /**
