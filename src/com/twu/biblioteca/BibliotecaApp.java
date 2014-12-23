@@ -144,10 +144,16 @@ public class BibliotecaApp {
      * @param bookId
      */
     public Book returnBookProcess(int bookId){
-        Book thisBook = library.get(bookId);
-        thisBook.setAvailable();
-        System.out.println("Thank you for returning the book.");
-        return thisBook;
+        try {
+            Book thisBook = library.get(bookId);
+            thisBook.setAvailable();
+            System.out.println("Thank you for returning the book.");
+            return thisBook;
+        }
+        catch(IndexOutOfBoundsException ex){
+            System.out.println("That is not a valid book to return.");
+            return null;
+        }
     }
 
     /**
