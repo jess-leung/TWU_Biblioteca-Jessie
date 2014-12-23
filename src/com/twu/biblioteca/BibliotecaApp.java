@@ -7,6 +7,13 @@ public class BibliotecaApp {
     ArrayList<Book> library = new ArrayList<Book>();
 
     /**
+     * Method to set welcome message
+     */
+    public String welcomeUser(){
+        return "Welcome to Biblioteca";
+    }
+
+    /**
      * Method to add a book to the library
      */
     public void addBook(String title, String author, String year){
@@ -72,6 +79,7 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         BibliotecaApp library = new BibliotecaApp();
+        System.out.println(library.welcomeUser());
     }
 
 
