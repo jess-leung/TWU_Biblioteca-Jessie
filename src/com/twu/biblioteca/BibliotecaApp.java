@@ -4,24 +4,21 @@ import java.util.*;
 
 public class BibliotecaApp {
 
-    private ArrayList<Book> library = new ArrayList<Book>();
-    public IOHelper helper = new IOHelper();
+    private BookCollection bookCollection;
+    private IOHelper helper;
 
-    /**
-     * Method to add a book to the library
-     */
-    public void addBook(String title, String author, String year){
-        Book newBook = new Book(title,author,year);
-        library.add(newBook);
+    public BibliotecaApp(){
+        bookCollection = new BookCollection();
+        helper = new IOHelper();
     }
 
     /**
      * Method to set up static library (adding and deleting books not supported)
      */
     public void setUp(){
-        addBook("Harry Potter and the Philosopher's Stone", "JK Rowling", "1997");
-        addBook("World War Z", "Max Brooks", "2006");
-        addBook("Artificial Intelligence", "Peter Norvig and Stuart J. Russell", "1994");
+        bookCollection.addBook("Harry Potter and the Philosopher's Stone", "JK Rowling", "1997");
+        bookCollection.addBook("World War Z", "Max Brooks", "2006");
+        bookCollection.addBook("Artificial Intelligence", "Peter Norvig and Stuart J. Russell", "1994");
     }
 
     /**
@@ -62,11 +59,11 @@ public class BibliotecaApp {
      */
     public void selectOption(String opt) {
         if (opt.equals("1")) {
-            listBooks();
+            bookCollection.listBooks();
         } else if(opt.equals("2")){
-            checkout();
+            bookCollection.checkout();
         } else if(opt.equals("3")){
-            returnBook();
+            bookCollection.returnBook();
         } else if(opt.equals("Q")){
             System.out.print("Quitting Biblioteca");
             return;
@@ -76,92 +73,10 @@ public class BibliotecaApp {
     }
 
     /**
-     * Get all books from the library
+     * Get book collection
      */
-    public void listBooks(){
-        for(Book b:library){
-            if(b.getStatus().equals("Available")) {
-                System.out.format("%4d %-50s %-50s %-4s%n", library.indexOf(b), b.getTitle(), b.getAuthor(), b.getYear());
-            }
-        }
-    }
-
-    /**
-     * Get a book's details from the library
-     */
-    public Book getBook(int idx){
-        try{
-            Book thisBook = library.get(idx);
-            return thisBook;
-        }
-        catch(IndexOutOfBoundsException ex){
-            return null;
-        }
-    }
-
-    /**
-     * Get user input on what book to checkout
-     */
-    public Book checkout(){
-        try {
-            String userOption = helper.getUserInput("Select a book (id): ");
-            Book checkedBook = checkoutBook(Integer.parseInt(userOption));
-            return checkedBook;
-        }
-        catch(Exception e){
-            System.out.println("That book is not available.");
-            return null;
-        }
-    }
-
-    /**
-     * Perform operation to check out a book from the library
-     * @param idx
-     */
-    public Book checkoutBook(int idx) throws IndexOutOfBoundsException{
-        Book thisBook = library.get(idx);
-        thisBook.setUnavailable();
-        System.out.println("Thank you! Enjoy the book");
-        return thisBook;
-    }
-
-    /**
-     * Get user input to return a book
-     */
-    public Book returnBook(){
-        try {
-            String userOption = helper.getUserInput("Input a book (id): ");
-            Book returnedBook = returnBookProcess(Integer.parseInt(userOption));
-            return returnedBook;
-        }
-        catch(Exception e){
-            System.out.println("That is not a valid book to return.");
-            return null;
-        }
-    }
-
-    /**
-     * Performs the returning a book process
-     * @param bookId
-     */
-    public Book returnBookProcess(int bookId) throws IndexOutOfBoundsException{
-        Book thisBook = library.get(bookId);
-        thisBook.setAvailable();
-        System.out.println("Thank you for returning the book.");
-        return thisBook;
-    }
-
-    /**
-     * Get the size of available library
-     */
-    public int sizeAvailable(){
-        int size = 0;
-        for(Book b:library){
-            if(b.getStatus().equals("Available")){
-                size+=1;
-            }
-        }
-        return size;
+    public BookCollection getBookCollection(){
+        return bookCollection;
     }
 
     public static void main(String[] args) {

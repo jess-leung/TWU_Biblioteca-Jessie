@@ -9,15 +9,17 @@ import java.io.*;
 
 public class BibliotecaTests {
 
-    BibliotecaApp library;
+    BibliotecaApp app;
+    BookCollection library;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
     public void setUp(){
-        library = new BibliotecaApp();
-        library.addBook("Harry Potter and the Philosopher's Stone","JK Rowling","1997");
-        library.addBook("World War Z","Max Brooks","2006");
-        library.addBook("Artificial Intelligence","Peter Norvig and Stuart J. Russell","1994");
+        app = new BibliotecaApp();
+        library = app.getBookCollection();
+        library.addBook("Harry Potter and the Philosopher's Stone", "JK Rowling", "1997");
+        library.addBook("World War Z", "Max Brooks", "2006");
+        library.addBook("Artificial Intelligence", "Peter Norvig and Stuart J. Russell", "1994");
     }
 
     @Before
@@ -35,7 +37,7 @@ public class BibliotecaTests {
     @Test
     public void testWelcomeMessage(){
         setUp();
-        library.welcomeUser();
+        app.welcomeUser();
         assertEquals("Welcome to Biblioteca\n", outContent.toString());
     }
 
@@ -68,14 +70,14 @@ public class BibliotecaTests {
     @Test
     public void testMenuOptions(){
         setUp();
-        library.displayMenuOptions();
+        app.displayMenuOptions();
         assertEquals("1. List Books\n2. Checkout Book\n3. Return Book\nQ. Quit\n",outContent.toString());
     }
 
     @Test
     public void testValidMenuOptionListBooks(){
         setUp();
-        library.selectOption("1");
+        app.selectOption("1");
         assertEquals(
                 "   0 Harry Potter and the Philosopher's Stone           JK Rowling" +
                 "                                         1997\n" +
@@ -88,14 +90,14 @@ public class BibliotecaTests {
     @Test
     public void testInvalidMenuOption(){
         setUp();
-        library.selectOption("123");
+        app.selectOption("123");
         assertEquals("Select a valid option!\n", outContent.toString());
     }
 
     @Test
     public void testQuit(){
         setUp();
-        library.selectOption("Q");
+        app.selectOption("Q");
         assertEquals("Quitting Biblioteca",outContent.toString());
     }
 
@@ -140,6 +142,11 @@ public class BibliotecaTests {
     }
 
     @Test
+    public void testUnsuccessfulCheckoutAlreadyCheckedOut(){
+
+    }
+
+    @Test
     public void testReturnBook(){
         setUp();
         // Simulate checked out book
@@ -159,7 +166,7 @@ public class BibliotecaTests {
         // Simulate checked out books
         Book checkBook1 = library.checkoutBook(1);
         Book checkBook2 = library.checkoutBook(2);
-        
+
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         Book returnedBook1 = library.returnBook();
@@ -193,5 +200,10 @@ public class BibliotecaTests {
 
         assertEquals("Input a book (id):  That is not a valid book to return.\n", outContent.toString());
         assertEquals(3,library.sizeAvailable());
+    }
+
+    @Test
+    public void testUnsuccessfulReturnAlreadyReturned(){
+        
     }
 }
