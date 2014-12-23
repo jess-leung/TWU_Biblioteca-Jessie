@@ -5,12 +5,14 @@ package com.twu.biblioteca;
  */
 public class Book {
 
-    String title;
-    String author;
-    String year;
+    private String title;
+    private String author;
+    private String year;
 
-    public Book(){
-
+    public Book(String bookTitle, String bookAuthor, String bookYear){
+        title = bookTitle;
+        author = bookAuthor;
+        year = bookYear;
     }
 
     public String getTitle(){

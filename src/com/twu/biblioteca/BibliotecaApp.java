@@ -10,11 +10,15 @@ public class BibliotecaApp {
      * Method to add a book to the library
      */
     public void addBook(String title, String author, String year){
-        Book newBook = new Book();
-        newBook.author = "Max Brooks";
-        newBook.year = "2006";
-        newBook.title = "World War Z";
+        Book newBook = new Book("Max Brooks","2006","World War Z");
         library.add(newBook);
+    }
+
+    /**
+     * Get all books from the library
+     */
+    public ArrayList<Book> getListing(){
+        return library;
     }
 
     /**
