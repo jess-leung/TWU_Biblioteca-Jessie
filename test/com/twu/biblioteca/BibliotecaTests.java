@@ -143,7 +143,14 @@ public class BibliotecaTests {
 
     @Test
     public void testUnsuccessfulCheckoutAlreadyCheckedOut(){
-
+        setUp();
+        // Simulate checked out book
+        library.getBook(1).setUnavailable();
+        String data = "1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        library.checkout();
+        assertEquals("Select a book (id):  That book is not available.\n",outContent.toString());
+        assertEquals(2,library.sizeAvailable());
     }
 
     @Test
@@ -204,6 +211,12 @@ public class BibliotecaTests {
 
     @Test
     public void testUnsuccessfulReturnAlreadyReturned(){
-        
+        setUp();
+        String data = "1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        library.returnBook();
+
+        assertEquals("Input a book (id):  That is not a valid book to return.\n", outContent.toString());
+        assertEquals(3,library.sizeAvailable());
     }
 }
