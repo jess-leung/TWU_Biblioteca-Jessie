@@ -53,17 +53,17 @@ public class BibliotecaTests {
 
     @Test
     public void testMenuOptions(){
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         setUp();
-        IOHelper helper = library.helper;
-        String menu = helper.displayMenuOptions();
-        assertEquals("1. List Books",menu);
+        library.displayMenuOptions();
+        assertEquals("1. List Books",outContent);
     }
 
     @Test
     public void testInvalidMenuOption(){
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         setUp();
-        library.helper.chooseOption("123");
+        library.chooseOption("123");
         assertEquals("Select a valid option!",outContent.toString());
     }
 
