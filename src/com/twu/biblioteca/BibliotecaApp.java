@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.*;
+import java.io.*;
 
 public class BibliotecaApp {
 
@@ -8,10 +9,27 @@ public class BibliotecaApp {
     public IOHelper helper = new IOHelper();
 
     /**
+     * Method to add a book to the library
+     */
+    public void addBook(String title, String author, String year){
+        Book newBook = new Book(title,author,year);
+        library.add(newBook);
+    }
+
+    /**
+     * Method to set up static library (adding and deleting books not supported)
+     */
+    public void setUp(){
+        addBook("Harry Potter and the Philosopher's Stone","JK Rowling","1997");
+        addBook("World War Z","Max Brooks","2006");
+        addBook("Artificial Intelligence","Peter Norvig and Stuart J. Russell","1994");
+    }
+
+    /**
      * Method to set welcome message
      */
     public void welcomeUser(){
-        System.out.print("Welcome to Biblioteca");
+        System.out.println("Welcome to Biblioteca");
     }
 
     /**
@@ -25,39 +43,44 @@ public class BibliotecaApp {
      * Display menu options
      */
     public void displayMenuOptions(){
-        System.out.print("1. List Books");
+        System.out.println("1. List Books");
     }
 
     /**
      * Get user input for menu option
      */
     public void chooseOption(){
-        int userOption = helper.getUserInput("Select an option: ");
-        selectOption(userOption);
+        try {
+            String userOption = helper.getUserInput("Select an option: ");
+            selectOption(userOption);
+        }
+        catch(IOException ex){
+
+        }
     }
 
     /**
      * Choose a menu option
      */
-    public void selectOption(int opt){
-        switch(opt){
-            default: System.out.print("Select a valid option!");
+    public void selectOption(String opt) {
+        if (opt.equals("1")) {
+            listBooks();
+        } else {
+            System.out.print("Select a valid option!");
         }
-    }
-
-    /**
-     * Method to add a book to the library
-     */
-    public void addBook(String title, String author, String year){
-        Book newBook = new Book(title,author,year);
-        library.add(newBook);
     }
 
     /**
      * Get all books from the library
      */
-    public ArrayList<Book> getListing(){
-        return library;
+    public void listBooks(){
+        int count=0;
+        for(Book b:library){
+            if(b.getStatus().equals("Available")) {
+                System.out.format("%4d %-50s %-50s %-4s%n", count, b.getTitle(), b.getAuthor(), b.getYear());
+                count+=1;
+            }
+        }
     }
 
     /**
@@ -111,8 +134,10 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         BibliotecaApp library = new BibliotecaApp();
+        library.setUp();
         library.welcomeUser();
         library.displayMenuOptions();
+        library.chooseOption();
     }
 
 

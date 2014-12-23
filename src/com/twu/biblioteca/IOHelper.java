@@ -7,7 +7,13 @@ import java.io.*;
  */
 public class IOHelper {
 
-    public int getUserInput(String prompt){
-        return 0;
+    public String getUserInput(String prompt) throws IOException{
+        String input = null;
+        System.out.print(prompt + " ");
+        BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+        input = is.readLine();
+        if(input.length()==0) return null;
+
+        return input;
     }
 }
