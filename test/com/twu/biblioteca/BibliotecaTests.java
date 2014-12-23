@@ -108,7 +108,7 @@ public class BibliotecaTests {
         assertEquals(new Book("World War Z","Max Brooks","2006"),checkoutBook);
         assertEquals("Unavailable",checkoutBook.getStatus());
         assertEquals(2,library.sizeAvailable());
-        assertEquals("Select a book (id): 1 Thank you! Enjoy the book\n",outContent.toString());
+        assertEquals("Select a book (id):  Thank you! Enjoy the book\n",outContent.toString());
     }
 
     @Test
@@ -142,21 +142,24 @@ public class BibliotecaTests {
     @Test
     public void testReturnBook(){
         setUp();
+        // Simulate checked out book
+        library.getBook(1).setUnavailable();
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        library.checkout();
         Book returnedBook = library.returnBook();
-        assertEquals(new Book("World War Z","Max Brooks","2006"),returnedBook);
+        assertEquals(new Book("World War Z", "Max Brooks", "2006"), returnedBook);
         assertEquals("Available",returnedBook.getStatus());
         assertEquals(3,library.sizeAvailable());
-        assertEquals("Thank you! Enjoy the book\nThank you for returning the book.\n",outContent.toString());
+        assertEquals("Input a book (id):  Thank you for returning the book.\n",outContent.toString());
     }
 
     @Test
     public void testReturnMultipleBooks(){
         setUp();
+        // Simulate checked out books
         Book checkBook1 = library.checkoutBook(1);
         Book checkBook2 = library.checkoutBook(2);
+        
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         Book returnedBook1 = library.returnBook();
@@ -188,7 +191,7 @@ public class BibliotecaTests {
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         library.returnBook();
 
-        assertEquals("Input a book(id):  That is not a valid book to return.\n", outContent.toString());
+        assertEquals("Input a book (id):  That is not a valid book to return.\n", outContent.toString());
         assertEquals(3,library.sizeAvailable());
     }
 }

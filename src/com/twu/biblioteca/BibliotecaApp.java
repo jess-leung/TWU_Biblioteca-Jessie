@@ -102,57 +102,53 @@ public class BibliotecaApp {
     /**
      * Get user input on what book to checkout
      */
-    public void checkout(){
+    public Book checkout(){
         try {
             String userOption = helper.getUserInput("Select a book (id): ");
-            checkoutBook(Integer.parseInt(userOption));
+            Book checkedBook = checkoutBook(Integer.parseInt(userOption));
+            return checkedBook;
         }
-        catch(Exception e){ }
-    }
-
-    /**
-     * Perform operation to check out a book from the library
-     * @param idx
-     */
-    public Book checkoutBook(int idx){
-        try{
-            Book thisBook = library.get(idx);
-            thisBook.setUnavailable();
-            System.out.println("Thank you! Enjoy the book");
-            return thisBook;
-        }
-        catch(IndexOutOfBoundsException ex){
+        catch(Exception e){
             System.out.println("That book is not available.");
             return null;
         }
     }
 
     /**
+     * Perform operation to check out a book from the library
+     * @param idx
+     */
+    public Book checkoutBook(int idx) throws IndexOutOfBoundsException{
+        Book thisBook = library.get(idx);
+        thisBook.setUnavailable();
+        System.out.println("Thank you! Enjoy the book");
+        return thisBook;
+    }
+
+    /**
      * Get user input to return a book
      */
-    public void returnBook(){
+    public Book returnBook(){
         try {
             String userOption = helper.getUserInput("Input a book (id): ");
-            returnBookProcess(Integer.parseInt(userOption));
+            Book returnedBook = returnBookProcess(Integer.parseInt(userOption));
+            return returnedBook;
         }
-        catch(Exception e){ }
+        catch(Exception e){
+            System.out.println("That is not a valid book to return.");
+            return null;
+        }
     }
 
     /**
      * Performs the returning a book process
      * @param bookId
      */
-    public Book returnBookProcess(int bookId){
-        try {
-            Book thisBook = library.get(bookId);
-            thisBook.setAvailable();
-            System.out.println("Thank you for returning the book.");
-            return thisBook;
-        }
-        catch(IndexOutOfBoundsException ex){
-            System.out.println("That is not a valid book to return.");
-            return null;
-        }
+    public Book returnBookProcess(int bookId) throws IndexOutOfBoundsException{
+        Book thisBook = library.get(bookId);
+        thisBook.setAvailable();
+        System.out.println("Thank you for returning the book.");
+        return thisBook;
     }
 
     /**
