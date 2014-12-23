@@ -18,6 +18,13 @@ public class BibliotecaTests {
     }
 
     @Test
+    public void testWelcomeMessage(){
+        setUp();
+        String welcomeMessage = library.welcomeUser();
+        assertEquals("Welcome to Biblioteca",welcomeMessage);
+    }
+
+    @Test
     public void testListBooks(){
         setUp();
         ArrayList<Book> correctList = new ArrayList<Book>();
