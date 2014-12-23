@@ -17,6 +17,30 @@ public class Book {
         status = "Available";
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Book){
+            Book b = (Book) o;
+            if(b.getTitle().equals(title) && b.getAuthor().equals(author) && b.getYear().equals(year)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void setUnavailable(){
+        status = "Unavailable";
+    }
+
+    public void setAvailable(){
+        status = "Available";
+    }
+
     public String getTitle(){
         return title;
     }

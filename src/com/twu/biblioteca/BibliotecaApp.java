@@ -34,6 +34,42 @@ public class BibliotecaApp {
         }
     }
 
+    /**
+     * Check out a book from the library
+     * @param idx
+     */
+    public Book checkout(int idx){
+        try{
+            Book thisBook = library.get(idx);
+            thisBook.setUnavailable();
+            return thisBook;
+        }
+        catch(IndexOutOfBoundsException ex){
+            return null;
+        }
+    }
+
+    /**
+     * Get the size of the library
+     * @return size
+     */
+    public int size(){
+        return library.size();
+    }
+
+    /**
+     * Get the size of available library
+     */
+    public int sizeAvailable(){
+        int size = 0;
+        for(Book b:library){
+            if(b.getStatus().equals("Available")){
+                size+=1;
+            }
+        }
+        return size;
+    }
+
     public static void main(String[] args) {
         BibliotecaApp library = new BibliotecaApp();
     }
