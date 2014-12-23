@@ -50,15 +50,20 @@ public class BibliotecaTests {
         assertEquals("Available",chosenBook.getStatus());
     }
 
+    @Test void testMenuOptions(){
+        String menu = library.IOHelper.displayMenuOptions();
+        assertEquals("1. List Books",menu);
+    }
+
     @Test
     public void testInvalidMenuOption(){
-
+        
     }
 
     @Test
     public void testCheckoutBook(){
         setUp();
-        Book checkoutBook = library.checkout(1);
+        Book checkoutBook = library.checkoutBook(1);
         assertEquals(new Book("World War Z","Max Brooks","2006"),checkoutBook);
         assertEquals("Unavailable",checkoutBook.getStatus());
         assertEquals(2,library.sizeAvailable());

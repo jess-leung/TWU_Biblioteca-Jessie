@@ -42,10 +42,10 @@ public class BibliotecaApp {
     }
 
     /**
-     * Check out a book from the library
+     * Perform operation to check out a book from the library
      * @param idx
      */
-    public Book checkout(int idx){
+    public Book checkoutBook(int idx){
         try{
             Book thisBook = library.get(idx);
             thisBook.setUnavailable();
