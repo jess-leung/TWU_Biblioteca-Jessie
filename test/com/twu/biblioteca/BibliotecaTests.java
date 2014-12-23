@@ -35,7 +35,8 @@ public class BibliotecaTests {
     @Test
     public void testWelcomeMessage(){
         setUp();
-        assertEquals(library.welcomeUser(),outContent.toString());
+        library.welcomeUser();
+        assertEquals("Welcome to Biblioteca",outContent.toString());
     }
 
     @Test
@@ -74,7 +75,7 @@ public class BibliotecaTests {
     @Test
     public void testInvalidMenuOption(){
         setUp();
-        library.selectOption("123");
+        library.selectOption(123);
         assertEquals("Select a valid option!",outContent.toString());
     }
 

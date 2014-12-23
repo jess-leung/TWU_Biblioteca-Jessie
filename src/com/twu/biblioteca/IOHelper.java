@@ -7,4 +7,7 @@ import java.io.*;
  */
 public class IOHelper {
 
+    public int getUserInput(String prompt){
+        return 0;
+    }
 }

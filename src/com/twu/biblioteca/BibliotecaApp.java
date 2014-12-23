@@ -15,6 +15,13 @@ public class BibliotecaApp {
     }
 
     /**
+     * Method to create menu and get user input
+     */
+    public void menu(){
+        displayMenuOptions();
+        chooseOption();
+    }
+    /**
      * Display menu options
      */
     public void displayMenuOptions(){
@@ -22,10 +29,20 @@ public class BibliotecaApp {
     }
 
     /**
+     * Get user input for menu option
+     */
+    public void chooseOption(){
+        int userOption = helper.getUserInput("Select an option: ");
+        selectOption(userOption);
+    }
+
+    /**
      * Choose a menu option
      */
-    public void chooseOption(String opt){
-        System.out.print("Select a valid option!");
+    public void selectOption(int opt){
+        switch(opt){
+            default: System.out.print("Select a valid option!");
+        }
     }
 
     /**
