@@ -8,26 +8,28 @@ public class Book {
     private String title;
     private String author;
     private String year;
+    private String status;
 
     public Book(String bookTitle, String bookAuthor, String bookYear){
         title = bookTitle;
         author = bookAuthor;
         year = bookYear;
+        status = "Available";
     }
 
     public String getTitle(){
-        return null;
+        return title;
     }
 
     public String getAuthor(){
-        return null;
+        return author;
     }
 
     public String getYear(){
-        return null;
+        return year;
     }
 
     public String getStatus(){
-        return null;
+        return status;
     }
 }

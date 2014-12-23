@@ -10,7 +10,7 @@ public class BibliotecaApp {
      * Method to add a book to the library
      */
     public void addBook(String title, String author, String year){
-        Book newBook = new Book("Max Brooks","2006","World War Z");
+        Book newBook = new Book(title,author,year);
         library.add(newBook);
     }
 
