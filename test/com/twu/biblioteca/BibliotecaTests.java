@@ -69,7 +69,7 @@ public class BibliotecaTests {
     public void testMenuOptions(){
         setUp();
         library.displayMenuOptions();
-        assertEquals("1. List Books\n",outContent.toString());
+        assertEquals("1. List Books\nQ. Quit",outContent.toString());
     }
 
     @Test
@@ -90,6 +90,13 @@ public class BibliotecaTests {
         setUp();
         library.selectOption("123");
         assertEquals("Select a valid option!", outContent.toString());
+    }
+
+    @Test
+    public void testQuit(){
+        setUp();
+        library.selectOption("Q");
+        assertEquals("Quitting Biblioteca",outContent.toString());
     }
 
     @Test

@@ -55,7 +55,7 @@ public class BibliotecaApp {
             selectOption(userOption);
         }
         catch(IOException ex){
-
+            // Caught
         }
     }
 
