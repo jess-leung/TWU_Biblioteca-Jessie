@@ -69,7 +69,7 @@ public class BibliotecaTests {
     public void testMenuOptions(){
         setUp();
         library.displayMenuOptions();
-        assertEquals("1. List Books\nQ. Quit",outContent.toString());
+        assertEquals("1. List Books\n2. Checkout Book\n3. Return Book\nQ. Quit\n",outContent.toString());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class BibliotecaTests {
     public void testInvalidMenuOption(){
         setUp();
         library.selectOption("123");
-        assertEquals("Select a valid option!", outContent.toString());
+        assertEquals("Select a valid option!\n", outContent.toString());
     }
 
     @Test
@@ -106,11 +106,14 @@ public class BibliotecaTests {
         assertEquals(new Book("World War Z","Max Brooks","2006"),checkoutBook);
         assertEquals("Unavailable",checkoutBook.getStatus());
         assertEquals(2,library.sizeAvailable());
+        assertEquals("Thank you! Enjoy the book\n",outContent.toString());
     }
 
     @Test
     public void testUnsuccessfulCheckout(){
-
+        setUp();
+        library.checkoutBook(123);
+        assertEquals("That book is not available.\n",outContent.toString());
     }
 
     @Test

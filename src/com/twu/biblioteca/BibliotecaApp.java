@@ -33,18 +33,13 @@ public class BibliotecaApp {
     }
 
     /**
-     * Method to create menu and get user input
-     */
-    public void menu(){
-        displayMenuOptions();
-        chooseOption();
-    }
-    /**
      * Display menu options
      */
     public void displayMenuOptions(){
         System.out.println("1. List Books");
-        System.out.print("Q. Quit");
+        System.out.println("2. Checkout Book");
+        System.out.println("3. Return Book");
+        System.out.println("Q. Quit");
     }
 
     /**
@@ -53,11 +48,12 @@ public class BibliotecaApp {
     public void chooseOption(){
         String userOption="";
         while(!userOption.equals("Q")) {
+            displayMenuOptions();
             try {
                 userOption = helper.getUserInput("Select an option: ");
                 selectOption(userOption);
             } catch (IOException ex) {
-                System.out.print("Select a valid option!");
+                System.out.println("Select a valid option!");
             }
         }
     }
@@ -68,11 +64,15 @@ public class BibliotecaApp {
     public void selectOption(String opt) {
         if (opt.equals("1")) {
             listBooks();
+        } else if(opt.equals("2")){
+            checkout();
+        } else if(opt.equals("3")){
+            returnBook();
         } else if(opt.equals("Q")){
             System.out.print("Quitting Biblioteca");
             return;
         } else {
-            System.out.print("Select a valid option!");
+            System.out.println("Select a valid option!");
         }
     }
 
@@ -80,11 +80,9 @@ public class BibliotecaApp {
      * Get all books from the library
      */
     public void listBooks(){
-        int count=0;
         for(Book b:library){
             if(b.getStatus().equals("Available")) {
-                System.out.format("%4d %-50s %-50s %-4s%n", count, b.getTitle(), b.getAuthor(), b.getYear());
-                count+=1;
+                System.out.format("%4d %-50s %-50s %-4s%n", library.indexOf(b), b.getTitle(), b.getAuthor(), b.getYear());
             }
         }
     }
@@ -103,6 +101,17 @@ public class BibliotecaApp {
     }
 
     /**
+     * Get user input on what book to checkout
+     */
+    public void checkout(){
+        try {
+            String userOption = helper.getUserInput("Select a book (id): ");
+            checkoutBook(Integer.parseInt(userOption));
+        }
+        catch(Exception e){ }
+    }
+
+    /**
      * Perform operation to check out a book from the library
      * @param idx
      */
@@ -110,11 +119,17 @@ public class BibliotecaApp {
         try{
             Book thisBook = library.get(idx);
             thisBook.setUnavailable();
+            System.out.println("Thank you! Enjoy the book");
             return thisBook;
         }
         catch(IndexOutOfBoundsException ex){
+            System.out.println("That book is not available.");
             return null;
         }
+    }
+
+    public void returnBook(){
+
     }
 
     /**
@@ -142,7 +157,6 @@ public class BibliotecaApp {
         BibliotecaApp library = new BibliotecaApp();
         library.setUp();
         library.welcomeUser();
-        library.displayMenuOptions();
         library.chooseOption();
     }
 
