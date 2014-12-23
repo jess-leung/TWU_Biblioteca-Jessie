@@ -15,6 +15,20 @@ public class BibliotecaApp {
     }
 
     /**
+     * Display menu options
+     */
+    public void displayMenuOptions(){
+        System.out.print("1. List Books");
+    }
+
+    /**
+     * Choose a menu option
+     */
+    public void chooseOption(String opt){
+        System.out.print("Select a valid option!");
+    }
+
+    /**
      * Method to add a book to the library
      */
     public void addBook(String title, String author, String year){
@@ -81,7 +95,7 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         BibliotecaApp library = new BibliotecaApp();
         System.out.println(library.welcomeUser());
-        System.out.println(library.displayMenuOptions());
+        library.displayMenuOptions();
     }
 
 

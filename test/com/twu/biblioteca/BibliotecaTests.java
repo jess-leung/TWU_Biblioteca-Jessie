@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -10,6 +10,8 @@ import java.io.*;
 public class BibliotecaTests {
 
     BibliotecaApp library;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
     public void setUp(){
         library = new BibliotecaApp();
@@ -18,11 +20,22 @@ public class BibliotecaTests {
         library.addBook("Artificial Intelligence","Peter Norvig and Stuart J. Russell","1994");
     }
 
+    @Before
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
+    }
+
+    @After
+    public void cleanUpStreams() {
+        System.setOut(null);
+        System.setErr(null);
+    }
+
     @Test
     public void testWelcomeMessage(){
         setUp();
-        String welcomeMessage = library.welcomeUser();
-        assertEquals("Welcome to Biblioteca",welcomeMessage);
+        assertEquals(library.welcomeUser(),outContent.toString());
     }
 
     @Test
@@ -53,15 +66,13 @@ public class BibliotecaTests {
 
     @Test
     public void testMenuOptions(){
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         setUp();
         library.displayMenuOptions();
-        assertEquals("1. List Books",outContent);
+        assertEquals("1. List Books",outContent.toString());
     }
 
     @Test
     public void testInvalidMenuOption(){
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         setUp();
         library.chooseOption("123");
         assertEquals("Select a valid option!",outContent.toString());

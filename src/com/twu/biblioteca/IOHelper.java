@@ -7,8 +7,4 @@ import java.io.*;
  */
 public class IOHelper {
 
-    public String displayMenuOptions(){
-        return "1. List Books";
-    }
-
 }
