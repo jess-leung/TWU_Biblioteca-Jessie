@@ -118,11 +118,35 @@ public class BibliotecaTests {
 
     @Test
     public void testReturnBook(){
+        setUp();
+        library.checkoutBook(1);
+        Book returnedBook = library.returnBookProcess(1);
+        assertEquals(new Book("World War Z","Max Brooks","2006"),returnedBook);
+        assertEquals("Available",returnedBook.getStatus());
+        assertEquals(3,library.sizeAvailable());
+        assertEquals("Thank you for returning the book.",outContent.toString());
+    }
 
+    @Test
+    public void testReturnMultipleBooks(){
+        setUp();
+        library.checkoutBook(1);
+        library.checkoutBook(2);
+        Book returnedBook1 = library.returnBookProcess(1);
+        assertEquals("Available", returnedBook1.getStatus());
+        assertEquals("Unavailable",returnedBook2.getStatus());
+        assertEquals(2,library.sizeAvailable());
+        Book returnedBook2 = library.returnBookProcess(2);
+        assertEquals("Available", returnedBook1.getStatus());
+        assertEquals("Available",returnedBook1.getStatus());
+        assertEquals(3,library.sizeAvailable());
     }
 
     @Test
     public void testUnsuccessfulReturn(){
-
+        setUp();
+        library.returnBookProcess(123);
+        assertEquals("That is not a valid book to return.",outContent.toString());
+        assertEquals(3,library.sizeAvailable());
     }
 }
