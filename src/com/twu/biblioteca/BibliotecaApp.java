@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import java.util.*;
-import java.io.*;
 
 public class BibliotecaApp {
 
@@ -154,14 +153,6 @@ public class BibliotecaApp {
             System.out.println("That is not a valid book to return.");
             return null;
         }
-    }
-
-    /**
-     * Get the size of the library
-     * @return size
-     */
-    public int size(){
-        return library.size();
     }
 
     /**
