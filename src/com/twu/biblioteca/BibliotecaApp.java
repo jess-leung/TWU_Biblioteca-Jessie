@@ -20,9 +20,9 @@ public class BibliotecaApp {
      * Method to set up static library (adding and deleting books not supported)
      */
     public void setUp(){
-        addBook("Harry Potter and the Philosopher's Stone","JK Rowling","1997");
-        addBook("World War Z","Max Brooks","2006");
-        addBook("Artificial Intelligence","Peter Norvig and Stuart J. Russell","1994");
+        addBook("Harry Potter and the Philosopher's Stone", "JK Rowling", "1997");
+        addBook("World War Z", "Max Brooks", "2006");
+        addBook("Artificial Intelligence", "Peter Norvig and Stuart J. Russell", "1994");
     }
 
     /**
@@ -44,18 +44,21 @@ public class BibliotecaApp {
      */
     public void displayMenuOptions(){
         System.out.println("1. List Books");
+        System.out.print("Q. Quit");
     }
 
     /**
      * Get user input for menu option
      */
     public void chooseOption(){
-        try {
-            String userOption = helper.getUserInput("Select an option: ");
-            selectOption(userOption);
-        }
-        catch(IOException ex){
-            // Caught
+        String userOption="";
+        while(!userOption.equals("Q")) {
+            try {
+                userOption = helper.getUserInput("Select an option: ");
+                selectOption(userOption);
+            } catch (IOException ex) {
+                System.out.print("Select a valid option!");
+            }
         }
     }
 
@@ -65,6 +68,9 @@ public class BibliotecaApp {
     public void selectOption(String opt) {
         if (opt.equals("1")) {
             listBooks();
+        } else if(opt.equals("Q")){
+            System.out.print("Quitting Biblioteca");
+            return;
         } else {
             System.out.print("Select a valid option!");
         }
