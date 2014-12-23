@@ -6,6 +6,10 @@ public class BibliotecaApp {
 
     private BookCollection bookCollection;
     private IOHelper helper;
+    private static final String SELECT_VALID_OPTION = "Select a valid option!";
+    private static final String SELECT_AN_OPTION = "Select an option: ";
+    private static final String WELCOME = "Welcome to Biblioteca";
+    private static final String QUIT_MESSAGE = "Quitting Biblioteca";
 
     public BibliotecaApp(){
         bookCollection = new BookCollection();
@@ -25,7 +29,7 @@ public class BibliotecaApp {
      * Method to set welcome message
      */
     public void welcomeUser(){
-        System.out.println("Welcome to Biblioteca");
+        System.out.println(WELCOME);
     }
 
     /**
@@ -46,10 +50,10 @@ public class BibliotecaApp {
         while(!userOption.equals("Q")) {
             displayMenuOptions();
             try {
-                userOption = helper.getUserInput("Select an option: ");
+                userOption = helper.getUserInput(SELECT_AN_OPTION);
                 selectOption(userOption);
             } catch (Exception ex){
-                System.out.println("Select a valid option!");
+                System.out.println(SELECT_VALID_OPTION);
             }
         }
     }
@@ -65,10 +69,10 @@ public class BibliotecaApp {
         } else if(opt.equals("3")){
             bookCollection.returnBook();
         } else if(opt.equals("Q")){
-            System.out.print("Quitting Biblioteca");
+            System.out.print(QUIT_MESSAGE);
             return;
         } else {
-            System.out.println("Select a valid option!");
+            System.out.println(SELECT_VALID_OPTION);
         }
     }
 
@@ -85,6 +89,4 @@ public class BibliotecaApp {
         library.welcomeUser();
         library.chooseOption();
     }
-
-
 }

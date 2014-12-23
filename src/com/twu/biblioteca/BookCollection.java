@@ -6,8 +6,14 @@ import java.util.*;
  * Created by jessieleung on 23/12/14.
  */
 public class BookCollection {
+
     private ArrayList<Book> library;
     private IOHelper helper;
+    private static final String NOT_VALID_BOOK_TO_RETURN = "That is not a valid book to return.";
+    private static final String BOOK_NOT_AVAILABLE = "That book is not available.";
+    private static final String THANK_YOU_RETURN_BOOK = "Thank you for returning the book.";
+    private static final String THANK_YOU_ENJOY_BOOK = "Thank you! Enjoy the book";
+    private static final String INPUT_BOOK_ID = "Input a book (id): ";
 
     public BookCollection(){
         library = new ArrayList<Book>();
@@ -52,12 +58,12 @@ public class BookCollection {
      */
     public Book checkout(){
         try {
-            String userOption = helper.getUserInput("Select a book (id): ");
+            String userOption = helper.getUserInput(INPUT_BOOK_ID);
             Book checkedBook = checkoutBook(Integer.parseInt(userOption));
             return checkedBook;
         }
         catch(Exception e){
-            System.out.println("That book is not available.");
+            System.out.println(BOOK_NOT_AVAILABLE);
             return null;
         }
     }
@@ -67,12 +73,12 @@ public class BookCollection {
      */
     public Book returnBook(){
         try {
-            String userOption = helper.getUserInput("Input a book (id): ");
+            String userOption = helper.getUserInput(INPUT_BOOK_ID);
             Book returnedBook = returnBookProcess(Integer.parseInt(userOption));
             return returnedBook;
         }
         catch(Exception e){
-            System.out.println("That is not a valid book to return.");
+            System.out.println(NOT_VALID_BOOK_TO_RETURN);
             return null;
         }
     }
@@ -83,9 +89,15 @@ public class BookCollection {
      */
     public Book checkoutBook(int idx) throws IndexOutOfBoundsException{
         Book thisBook = library.get(idx);
-        thisBook.setUnavailable();
-        System.out.println("Thank you! Enjoy the book");
-        return thisBook;
+        if(thisBook.getStatus().equals("Available")) {
+            thisBook.setUnavailable();
+            System.out.println(THANK_YOU_ENJOY_BOOK);
+            return thisBook;
+        }
+        else{
+            System.out.println(BOOK_NOT_AVAILABLE);
+            return null;
+        }
     }
 
     /**
@@ -94,9 +106,15 @@ public class BookCollection {
      */
     public Book returnBookProcess(int bookId) throws IndexOutOfBoundsException{
         Book thisBook = library.get(bookId);
-        thisBook.setAvailable();
-        System.out.println("Thank you for returning the book.");
-        return thisBook;
+        if(thisBook.getStatus().equals("Unavailable")) {
+            thisBook.setAvailable();
+            System.out.println(THANK_YOU_RETURN_BOOK);
+            return thisBook;
+        }
+        else{
+            System.out.println(NOT_VALID_BOOK_TO_RETURN);
+            return null;
+        }
     }
 
     /**

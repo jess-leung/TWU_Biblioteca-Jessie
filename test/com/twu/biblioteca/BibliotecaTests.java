@@ -110,7 +110,7 @@ public class BibliotecaTests {
         assertEquals(new Book("World War Z","Max Brooks","2006"),checkoutBook);
         assertEquals("Unavailable",checkoutBook.getStatus());
         assertEquals(2,library.sizeAvailable());
-        assertEquals("Select a book (id):  Thank you! Enjoy the book\n",outContent.toString());
+        assertEquals("Input a book (id):  Thank you! Enjoy the book\n",outContent.toString());
     }
 
     @Test
@@ -138,7 +138,7 @@ public class BibliotecaTests {
         String data = "123";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         library.checkout();
-        assertEquals("Select a book (id):  That book is not available.\n",outContent.toString());
+        assertEquals("Input a book (id):  That book is not available.\n",outContent.toString());
     }
 
     @Test
@@ -149,7 +149,7 @@ public class BibliotecaTests {
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         library.checkout();
-        assertEquals("Select a book (id):  That book is not available.\n",outContent.toString());
+        assertEquals("Input a book (id):  That book is not available.\n",outContent.toString());
         assertEquals(2,library.sizeAvailable());
     }
 
