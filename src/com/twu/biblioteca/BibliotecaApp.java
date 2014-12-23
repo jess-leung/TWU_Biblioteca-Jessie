@@ -4,7 +4,8 @@ import java.util.*;
 
 public class BibliotecaApp {
 
-    ArrayList<Book> library = new ArrayList<Book>();
+    private ArrayList<Book> library = new ArrayList<Book>();
+    public IOHelper helper = new IOHelper();
 
     /**
      * Method to set welcome message
@@ -80,6 +81,7 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         BibliotecaApp library = new BibliotecaApp();
         System.out.println(library.welcomeUser());
+        System.out.println(library.helper.displayMenuOptions());
     }
 
 

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.*;
+import java.io.*;
 
 public class BibliotecaTests {
 
@@ -50,14 +51,20 @@ public class BibliotecaTests {
         assertEquals("Available",chosenBook.getStatus());
     }
 
-    @Test void testMenuOptions(){
-        String menu = library.IOHelper.displayMenuOptions();
+    @Test
+    public void testMenuOptions(){
+        setUp();
+        IOHelper helper = library.helper;
+        String menu = helper.displayMenuOptions();
         assertEquals("1. List Books",menu);
     }
 
     @Test
     public void testInvalidMenuOption(){
-        
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        setUp();
+        library.helper.chooseOption("123");
+        assertEquals("Select a valid option!",outContent.toString());
     }
 
     @Test
