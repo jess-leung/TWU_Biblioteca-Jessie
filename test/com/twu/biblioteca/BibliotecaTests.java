@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -46,12 +45,16 @@ public class BibliotecaTests {
 
     @Test
     public void testInvalidMenuOption(){
-
+       
     }
 
     @Test
     public void testCheckoutBook(){
-
+        setUp();
+        Book checkoutBook = library.checkout(1);
+        assertEquals(new Book("World War Z","Max Books","2006"),checkoutBook);
+        assertEquals("Unavailable",checkoutBook.getStatus());
+        assertEquals(2,library.size());
     }
 
     @Test
