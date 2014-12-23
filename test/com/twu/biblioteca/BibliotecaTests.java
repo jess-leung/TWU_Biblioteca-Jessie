@@ -102,25 +102,50 @@ public class BibliotecaTests {
     @Test
     public void testCheckoutBook(){
         setUp();
-        Book checkoutBook = library.checkoutBook(1);
+        String data = "1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        Book checkoutBook = library.checkout();
         assertEquals(new Book("World War Z","Max Brooks","2006"),checkoutBook);
         assertEquals("Unavailable",checkoutBook.getStatus());
         assertEquals(2,library.sizeAvailable());
-        assertEquals("Thank you! Enjoy the book\n",outContent.toString());
+        assertEquals("Select a book (id): 1 Thank you! Enjoy the book\n",outContent.toString());
+    }
+
+    @Test
+    public void testCheckoutMultipleBooks(){
+        setUp();
+        String data = "1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        library.checkout();
+        assertEquals(2,library.sizeAvailable());
+        assertEquals("Available",library.getBook(0).getStatus());
+        assertEquals("Unavailable",library.getBook(1).getStatus());
+        assertEquals("Available",library.getBook(2).getStatus());
+        data = "2";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        library.checkout();
+        assertEquals(1,library.sizeAvailable());
+        assertEquals("Available",library.getBook(0).getStatus());
+        assertEquals("Unavailable",library.getBook(1).getStatus());
+        assertEquals("Unavailable",library.getBook(2).getStatus());
     }
 
     @Test
     public void testUnsuccessfulCheckout(){
         setUp();
-        library.checkoutBook(123);
-        assertEquals("That book is not available.\n",outContent.toString());
+        String data = "123";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        library.checkout();
+        assertEquals("Select a book (id):  That book is not available.\n",outContent.toString());
     }
 
     @Test
     public void testReturnBook(){
         setUp();
-        library.checkoutBook(1);
-        Book returnedBook = library.returnBookProcess(1);
+        String data = "1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        library.checkout();
+        Book returnedBook = library.returnBook();
         assertEquals(new Book("World War Z","Max Brooks","2006"),returnedBook);
         assertEquals("Available",returnedBook.getStatus());
         assertEquals(3,library.sizeAvailable());
@@ -132,11 +157,15 @@ public class BibliotecaTests {
         setUp();
         Book checkBook1 = library.checkoutBook(1);
         Book checkBook2 = library.checkoutBook(2);
-        Book returnedBook1 = library.returnBookProcess(1);
+        String data = "1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        Book returnedBook1 = library.returnBook();
         assertEquals("Available", returnedBook1.getStatus());
         assertEquals("Unavailable",checkBook2.getStatus());
         assertEquals(2,library.sizeAvailable());
-        Book returnedBook2 = library.returnBookProcess(2);
+        data = "2";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        Book returnedBook2 = library.returnBook();
         assertEquals("Available", returnedBook1.getStatus());
         assertEquals("Available",returnedBook1.getStatus());
         assertEquals(3,library.sizeAvailable());
@@ -145,8 +174,21 @@ public class BibliotecaTests {
     @Test
     public void testUnsuccessfulReturn(){
         setUp();
-        library.returnBookProcess(123);
-        assertEquals("That is not a valid book to return.\n", outContent.toString());
+        String data = "123";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        library.returnBook();
+        assertEquals("Input a book (id):  That is not a valid book to return.\n", outContent.toString());
+        assertEquals(3,library.sizeAvailable());
+    }
+
+    @Test
+    public void testUnsuccessfulReturnNotBookId(){
+        setUp();
+        String data = "Not even a number";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        library.returnBook();
+
+        assertEquals("Input a book(id):  That is not a valid book to return.\n", outContent.toString());
         assertEquals(3,library.sizeAvailable());
     }
 }

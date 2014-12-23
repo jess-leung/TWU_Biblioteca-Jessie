@@ -132,7 +132,7 @@ public class BibliotecaApp {
      */
     public void returnBook(){
         try {
-            String userOption = helper.getUserInput("Select a book (id): ");
+            String userOption = helper.getUserInput("Input a book (id): ");
             returnBookProcess(Integer.parseInt(userOption));
         }
         catch(Exception e){ }
