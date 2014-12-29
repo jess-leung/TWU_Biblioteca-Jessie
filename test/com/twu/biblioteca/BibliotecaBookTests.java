@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.*;
 import java.io.*;
 
-public class BibliotecaTests {
+public class BibliotecaBookTests {
 
     BibliotecaApp app;
     BookCollection library;
@@ -35,11 +35,6 @@ public class BibliotecaTests {
         System.setErr(null);
     }
 
-    @Test
-    public void shouldDisplayWelcomeMessageOnStartUp(){
-        app.welcomeUser();
-        assertEquals("Welcome to Biblioteca\n", outContent.toString());
-    }
 
     @Test
     public void shouldHaveCorrectDetailsForBooks(){
@@ -65,11 +60,7 @@ public class BibliotecaTests {
         assertEquals("Available",chosenBook.getStatus());
     }
 
-    @Test
-    public void shouldDisplayCorrectMenuOptions(){
-        app.displayMenuOptions();
-        assertEquals("1. List Books\n2. Checkout Book\n3. Return Book\nQ. Quit\n",outContent.toString());
-    }
+
 
     @Test
     public void shouldListAvailableBooksOnSelectOfListBooks(){
@@ -81,18 +72,6 @@ public class BibliotecaTests {
                         "                                         2006\n" +
                 "   2 Artificial Intelligence                            Peter Norvig and Stuart J. Russell" +
                         "                 1994\n",outContent.toString());
-    }
-
-    @Test
-    public void shouldDisplayMessageOnInvalidMenuOption(){
-        app.selectOption("123");
-        assertEquals("Select a valid option!\n", outContent.toString());
-    }
-
-    @Test
-    public void shouldDisplayMessageOnQuit(){
-        app.selectOption("Q");
-        assertEquals("Quitting Biblioteca",outContent.toString());
     }
 
     @Test
