@@ -26,6 +26,7 @@ public class BibliotecaTests {
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
+        setUp();
     }
 
     @After
@@ -35,15 +36,13 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testWelcomeMessage(){
-        setUp();
+    public void shouldDisplayWelcomeMessageOnStartUp(){
         app.welcomeUser();
         assertEquals("Welcome to Biblioteca\n", outContent.toString());
     }
 
     @Test
-    public void testBooksInLibrary(){
-        setUp();
+    public void shouldHaveCorrectDetailsForBooks(){
         ArrayList<Book> correctList = new ArrayList<Book>();
         correctList.add(new Book("Harry Potter and the Philosopher's Stone","JK Rowling","1997"));
         correctList.add(new Book("World War Z","Max Brooks","2006"));
@@ -58,8 +57,7 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testBookDetails(){
-        setUp();
+    public void shouldRetrieveCorrectBookWhenGettingIt(){
         Book chosenBook = library.getBook(1);
         assertEquals("World War Z",chosenBook.getTitle());
         assertEquals("Max Brooks",chosenBook.getAuthor());
@@ -68,15 +66,13 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testMenuOptions(){
-        setUp();
+    public void shouldDisplayCorrectMenuOptions(){
         app.displayMenuOptions();
         assertEquals("1. List Books\n2. Checkout Book\n3. Return Book\nQ. Quit\n",outContent.toString());
     }
 
     @Test
-    public void testValidMenuOptionListBooks(){
-        setUp();
+    public void shouldListAvailableBooksOnSelectOfListBooks(){
         app.selectOption("1");
         assertEquals(
                 "   0 Harry Potter and the Philosopher's Stone           JK Rowling" +
@@ -88,22 +84,19 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testInvalidMenuOption(){
-        setUp();
+    public void shouldDisplayMessageOnInvalidMenuOption(){
         app.selectOption("123");
         assertEquals("Select a valid option!\n", outContent.toString());
     }
 
     @Test
-    public void testQuit(){
-        setUp();
+    public void shouldDisplayMessageOnQuit(){
         app.selectOption("Q");
         assertEquals("Quitting Biblioteca",outContent.toString());
     }
 
     @Test
-    public void testCheckoutBook(){
-        setUp();
+    public void shouldHaveCorrectLibraryDetailsAfterCheckout(){
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         Book checkoutBook = library.checkout();
@@ -114,8 +107,7 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testCheckoutMultipleBooks(){
-        setUp();
+    public void shouldHaveCorrectLibraryDetailsAfterMultipleCheckouts(){
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         library.checkout();
@@ -133,8 +125,7 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testUnsuccessfulCheckout(){
-        setUp();
+    public void shouldDisplayMessageIfRequestedBookForCheckoutDoesNotExist(){
         String data = "123";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         library.checkout();
@@ -142,8 +133,7 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testUnsuccessfulCheckoutAlreadyCheckedOut(){
-        setUp();
+    public void shouldDisplayMessageIfBookNotAvailableForCheckout(){
         // Simulate checked out book
         library.getBook(1).setUnavailable();
         String data = "1";
@@ -154,8 +144,7 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testReturnBook(){
-        setUp();
+    public void shouldHaveCorrectLibraryDetailsAfterReturnBook(){
         // Simulate checked out book
         library.getBook(1).setUnavailable();
         String data = "1";
@@ -168,8 +157,7 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testReturnMultipleBooks(){
-        setUp();
+    public void shouldHaveCorrectLibraryDetailsAfterReturnMultipleBooks(){
         // Simulate checked out books
         Book checkBook1 = library.checkoutBook(1);
         Book checkBook2 = library.checkoutBook(2);
@@ -189,8 +177,7 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testUnsuccessfulReturn(){
-        setUp();
+    public void shouldDisplayMessageOnNonExistingBookReturn(){
         String data = "123";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         library.returnBook();
@@ -199,8 +186,7 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testUnsuccessfulReturnNotBookId(){
-        setUp();
+    public void shouldDisplayMessageOnInvalidBookReturn(){
         String data = "Not even a number";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         library.returnBook();
@@ -210,8 +196,7 @@ public class BibliotecaTests {
     }
 
     @Test
-    public void testUnsuccessfulReturnAlreadyReturned(){
-        setUp();
+    public void shouldDisplayMessageOnAlreadyAvailableBookReturn(){
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         library.returnBook();
