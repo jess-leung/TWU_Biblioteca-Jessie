@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 public class BibliotecaMovieTests {
 
     BibliotecaApp app;
-    BookCollect moviesLibrary;
+    MovieCollection moviesLibrary;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
@@ -48,12 +48,12 @@ public class BibliotecaMovieTests {
 
     @Test
     public void shouldRetrieveCorrectMovieWhenGettingIt(){
-        Movie chosenMovie = movieLibrary.get(1);
+        Movie chosenMovie = moviesLibrary.get(1);
         assertEquals("World War Z",chosenMovie.getTitle());
         assertEquals("Marc Forster",chosenMovie.getDirector());
         assertEquals("2013",chosenMovie.getYear());
         assertEquals("Available",chosenMovie.getStatus());
-        assertEquals("8",chosenMovie.getRating());
+        assertEquals("9",chosenMovie.getRating());
     }
 
     @Test

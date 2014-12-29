@@ -5,6 +5,7 @@ import java.util.*;
 public class BibliotecaApp {
 
     private BookCollection bookCollection;
+    private MovieCollection movieCollection;
     private IOHelper helper;
     private static final String SELECT_VALID_OPTION = "Select a valid option!";
     private static final String SELECT_AN_OPTION = "Select an option: ";
@@ -13,6 +14,7 @@ public class BibliotecaApp {
 
     public BibliotecaApp(){
         bookCollection = new BookCollection();
+        movieCollection = new MovieCollection();
         helper = new IOHelper();
     }
 
@@ -82,6 +84,11 @@ public class BibliotecaApp {
     public BookCollection getBookCollection(){
         return bookCollection;
     }
+
+    /**
+     * Get movie collection
+     */
+    public MovieCollection getMovieCollection(){ return movieCollection; }
 
     public static void main(String[] args) {
         BibliotecaApp library = new BibliotecaApp();
