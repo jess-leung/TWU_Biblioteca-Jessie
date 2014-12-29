@@ -3,18 +3,13 @@ package com.twu.biblioteca;
 /**
  * Created by jessieleung on 23/12/14.
  */
-public class Book {
+public class Book extends MediaItem {
 
-    private String title;
     private String author;
-    private String year;
-    private String status;
 
     public Book(String bookTitle, String bookAuthor, String bookYear){
-        title = bookTitle;
+        super(bookTitle,bookYear);
         author = bookAuthor;
-        year = bookYear;
-        status = "Available";
     }
 
     @Override
@@ -33,28 +28,8 @@ public class Book {
         }
     }
 
-    public void setUnavailable(){
-        status = "Unavailable";
-    }
-
-    public void setAvailable(){
-        status = "Available";
-    }
-
-    public String getTitle(){
-        return title;
-    }
-
     public String getAuthor(){
         return author;
-    }
-
-    public String getYear(){
-        return year;
-    }
-
-    public String getStatus(){
-        return status;
     }
 
 }
