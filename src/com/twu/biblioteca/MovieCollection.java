@@ -5,20 +5,16 @@ import java.util.ArrayList;
 /**
  * Created by jessieleung on 30/12/14.
  */
-public class MovieCollection {
-
-    private ArrayList<Movie> library;
-    private IOHelper helper;
+public class MovieCollection extends MediaCollection {
 
     public MovieCollection(){
-        library = new ArrayList<Movie>();
-        helper = new IOHelper();
+        super();
     }
 
     /**
      * Method to add a movie to library
      */
-    public void addMovie(String title, String director, String year, String rating){
+    public void add(String title, String director, String year, String rating){
         Movie newMovie = new Movie(title,director,year,rating);
         library.add(newMovie);
     }
@@ -28,11 +24,15 @@ public class MovieCollection {
      */
     public Movie get(int idx){
         try{
-            Movie thisMovie = library.get(idx);
+            Movie thisMovie = (Movie) library.get(idx);
             return thisMovie;
         }
         catch(IndexOutOfBoundsException ex){
             return null;
         }
+    }
+
+    public void list(){
+
     }
 }

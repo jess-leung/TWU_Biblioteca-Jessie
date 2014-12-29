@@ -5,10 +5,8 @@ import java.util.*;
 /**
  * Created by jessieleung on 23/12/14.
  */
-public class BookCollection {
+public class BookCollection extends MediaCollection {
 
-    private ArrayList<Book> library;
-    private IOHelper helper;
     private static final String NOT_VALID_BOOK_TO_RETURN = "That is not a valid book to return.";
     private static final String BOOK_NOT_AVAILABLE = "That book is not available.";
     private static final String THANK_YOU_RETURN_BOOK = "Thank you for returning the book.";
@@ -16,14 +14,13 @@ public class BookCollection {
     private static final String INPUT_BOOK_ID = "Input a book (id): ";
 
     public BookCollection(){
-        library = new ArrayList<Book>();
-        helper = new IOHelper();
+        super();
     }
 
     /**
      * Method to add a book to the library
      */
-    public void addBook(String title, String author, String year){
+    public void add(String title, String author, String year){
         Book newBook = new Book(title,author,year);
         library.add(newBook);
     }
@@ -31,8 +28,9 @@ public class BookCollection {
     /**
      * Get all books from the library
      */
-    public void listBooks(){
-        for(Book b:library){
+    public void list(){
+        for(MediaItem item:library){
+            Book b = (Book) item;
             if(b.getStatus().equals("Available")) {
                 System.out.format("%4d %-50s %-50s %-4s%n", library.indexOf(b), b.getTitle(), b.getAuthor(), b.getYear());
             }
@@ -44,7 +42,7 @@ public class BookCollection {
      */
     public Book getBook(int idx){
         try{
-            Book thisBook = library.get(idx);
+            Book thisBook = (Book) library.get(idx);
             return thisBook;
         }
         catch(IndexOutOfBoundsException ex){
@@ -88,7 +86,7 @@ public class BookCollection {
      * @param idx
      */
     public Book checkoutBook(int idx) throws IndexOutOfBoundsException{
-        Book thisBook = library.get(idx);
+        Book thisBook = (Book) library.get(idx);
         if(thisBook.getStatus().equals("Available")) {
             thisBook.setUnavailable();
             System.out.println(THANK_YOU_ENJOY_BOOK);
@@ -105,7 +103,7 @@ public class BookCollection {
      * @param bookId
      */
     public Book returnBookProcess(int bookId) throws IndexOutOfBoundsException{
-        Book thisBook = library.get(bookId);
+        Book thisBook = (Book) library.get(bookId);
         if(thisBook.getStatus().equals("Unavailable")) {
             thisBook.setAvailable();
             System.out.println(THANK_YOU_RETURN_BOOK);
@@ -122,7 +120,8 @@ public class BookCollection {
      */
     public int sizeAvailable(){
         int size = 0;
-        for(Book b:library){
+        for(MediaItem item:library){
+            Book b = (Book) item;
             if(b.getStatus().equals("Available")){
                 size+=1;
             }

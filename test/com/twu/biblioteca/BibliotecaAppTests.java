@@ -22,9 +22,9 @@ public class BibliotecaAppTests {
     public void setUp(){
         app = new BibliotecaApp();
         library = app.getBookCollection();
-        library.addBook("Harry Potter and the Philosopher's Stone", "JK Rowling", "1997");
-        library.addBook("World War Z", "Max Brooks", "2006");
-        library.addBook("Artificial Intelligence", "Peter Norvig and Stuart J. Russell", "1994");
+        library.add("Harry Potter and the Philosopher's Stone", "JK Rowling", "1997");
+        library.add("World War Z", "Max Brooks", "2006");
+        library.add("Artificial Intelligence", "Peter Norvig and Stuart J. Russell", "1994");
     }
 
     @Before

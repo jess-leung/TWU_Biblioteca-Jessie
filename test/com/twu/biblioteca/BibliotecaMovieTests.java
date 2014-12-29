@@ -23,14 +23,14 @@ public class BibliotecaMovieTests {
     public void setUp(){
         app = new BibliotecaApp();
         moviesLibrary = app.getMovieCollection();
-        moviesLibrary.addMovie("Harry Potter and the Philosopher's Stone", "Chris Columbus", "2001","8");
-        moviesLibrary.addMovie("World War Z", "Marc Forster", "2013","9");
-        moviesLibrary.addMovie("The Hours","Stephen Daldry","2002","10");
-        moviesLibrary.addMovie("Godzilla","Gareth Edwards","2014","6");
-        moviesLibrary.addMovie("Zombieland","Ruben Fleischer","2009","10");
-        moviesLibrary.addMovie("Looper","Rian Johnson","2012","Unrated");
-        moviesLibrary.addMovie("How to Lose a Guy in 10 Days","Donald Petrie","2003","5");
-        moviesLibrary.addMovie("Spirited AWay","Hayao Miyazaki","2001","9");
+        moviesLibrary.add("Harry Potter and the Philosopher's Stone", "Chris Columbus", "2001","8");
+        moviesLibrary.add("World War Z", "Marc Forster", "2013","9");
+        moviesLibrary.add("The Hours","Stephen Daldry","2002","10");
+        moviesLibrary.add("Godzilla","Gareth Edwards","2014","6");
+        moviesLibrary.add("Zombieland","Ruben Fleischer","2009","10");
+        moviesLibrary.add("Looper","Rian Johnson","2012","Unrated");
+        moviesLibrary.add("How to Lose a Guy in 10 Days","Donald Petrie","2003","5");
+        moviesLibrary.add("Spirited AWay","Hayao Miyazaki","2001","9");
     }
 
     @Before

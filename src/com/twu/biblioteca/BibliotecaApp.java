@@ -22,9 +22,9 @@ public class BibliotecaApp {
      * Method to set up static library (adding and deleting books not supported)
      */
     public void setUp(){
-        bookCollection.addBook("Harry Potter and the Philosopher's Stone", "JK Rowling", "1997");
-        bookCollection.addBook("World War Z", "Max Brooks", "2006");
-        bookCollection.addBook("Artificial Intelligence", "Peter Norvig and Stuart J. Russell", "1994");
+        bookCollection.add("Harry Potter and the Philosopher's Stone", "JK Rowling", "1997");
+        bookCollection.add("World War Z", "Max Brooks", "2006");
+        bookCollection.add("Artificial Intelligence", "Peter Norvig and Stuart J. Russell", "1994");
     }
 
     /**
@@ -65,7 +65,7 @@ public class BibliotecaApp {
      */
     public void selectOption(String opt) {
         if (opt.equals("1")) {
-            bookCollection.listBooks();
+            bookCollection.list();
         } else if(opt.equals("2")){
             bookCollection.checkout();
         } else if(opt.equals("3")){
