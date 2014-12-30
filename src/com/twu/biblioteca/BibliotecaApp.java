@@ -25,6 +25,10 @@ public class BibliotecaApp {
         bookCollection.add("Harry Potter and the Philosopher's Stone", "JK Rowling", "1997");
         bookCollection.add("World War Z", "Max Brooks", "2006");
         bookCollection.add("Artificial Intelligence", "Peter Norvig and Stuart J. Russell", "1994");
+        movieCollection.add("Harry Potter and the Philosopher's Stone", "Chris Columbus", "2001", "8");
+        movieCollection.add("World War Z", "Marc Forster", "2013", "9");
+        movieCollection.add("Godzilla", "Gareth Edwards", "2014", "Unrated");
+        movieCollection.add("Zombieland", "Ruben Fleischer", "2009", "10");
     }
 
     /**
@@ -38,10 +42,16 @@ public class BibliotecaApp {
      * Display menu options
      */
     public void displayMenuOptions(){
+        System.out.println("------BIBLIOTECA MENU-------");
+        System.out.println("-----------Books------------");
         System.out.println("1. List Books");
         System.out.println("2. Checkout Book");
         System.out.println("3. Return Book");
+        System.out.println("-----------Movies-----------");
+        System.out.println("4. List Movies");
+        System.out.println("----------------------------");
         System.out.println("Q. Quit");
+        System.out.println("----------------------------");
     }
 
     /**
@@ -70,6 +80,8 @@ public class BibliotecaApp {
             bookCollection.checkout();
         } else if(opt.equals("3")){
             bookCollection.returnItem();
+        } else if(opt.equals("4")){
+            movieCollection.list();
         } else if(opt.equals("Q")){
             System.out.print(QUIT_MESSAGE);
             return;
