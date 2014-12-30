@@ -83,6 +83,8 @@ public class BibliotecaApp {
             bookCollection.returnItem();
         } else if(opt.equals("4")){
             movieCollection.list();
+        } else if(opt.equals("5")){
+            movieCollection.checkout();
         } else if(opt.equals("Q")){
             System.out.print(QUIT_MESSAGE);
             return;
