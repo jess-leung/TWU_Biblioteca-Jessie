@@ -49,7 +49,15 @@ public class BibliotecaAppTests {
     @Test
     public void shouldDisplayCorrectMenuOptions(){
         app.displayMenuOptions();
-        assertEquals("1. List Books\n2. Checkout Book\n3. Return Book\nQ. Quit\n",outContent.toString());
+        assertEquals(
+                "------BIBLIOTECA MENU-------\n"+
+                "-----------Books------------\n"+
+                "1. List Books\n2. Checkout Book\n3. Return Book\n"+
+                "-----------Movies-----------\n"+
+                "4. List Movies\n"+
+                "----------------------------\n"+
+                "Q. Quit\n"+
+                "----------------------------\n",outContent.toString());
     }
 
     @Test
