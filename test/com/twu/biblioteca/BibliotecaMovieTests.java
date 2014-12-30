@@ -54,7 +54,7 @@ public class BibliotecaMovieTests {
 
     @Test
     public void shouldListMoviesOnSelectOfListMovies(){
-        moviesLibrary.list();
+        app.selectOption("4");
         assertEquals(
             "   0 Harry Potter and the Philosopher's Stone           Chris Columbus" +
                     "                                     2001 8      \n" +
