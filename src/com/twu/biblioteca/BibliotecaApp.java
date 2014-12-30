@@ -49,6 +49,7 @@ public class BibliotecaApp {
         System.out.println("3. Return Book");
         System.out.println("-----------Movies-----------");
         System.out.println("4. List Movies");
+        System.out.println("5. Checkout Movie");
         System.out.println("----------------------------");
         System.out.println("Q. Quit");
         System.out.println("----------------------------");
