@@ -6,6 +6,7 @@ public class BibliotecaApp {
 
     private BookCollection bookCollection;
     private MovieCollection movieCollection;
+    private UsersList users;
     private IOHelper helper;
     private static final String SELECT_VALID_OPTION = "Select a valid option!";
     private static final String SELECT_AN_OPTION = "Select an option: ";
@@ -104,6 +105,11 @@ public class BibliotecaApp {
      * Get movie collection
      */
     public MovieCollection getMovieCollection(){ return movieCollection; }
+
+    /**
+     * Get users list
+     */
+    public UsersList getUsers(){ return users; }
 
     public static void main(String[] args) {
         BibliotecaApp library = new BibliotecaApp();
