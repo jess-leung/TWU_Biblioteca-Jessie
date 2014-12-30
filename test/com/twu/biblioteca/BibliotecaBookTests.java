@@ -138,8 +138,8 @@ public class BibliotecaBookTests {
     @Test
     public void shouldHaveCorrectLibraryDetailsAfterReturnMultipleBooks(){
         // Simulate checked out books
-        Book checkBook1 = library.checkoutBook(1);
-        Book checkBook2 = library.checkoutBook(2);
+        Book checkBook1 = (Book) library.checkoutItem(1);
+        Book checkBook2 = (Book) library.checkoutItem(2);
 
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));

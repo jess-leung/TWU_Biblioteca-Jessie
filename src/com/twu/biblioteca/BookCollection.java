@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -55,10 +56,9 @@ public class BookCollection extends MediaCollection {
      * @return
      */
     public Book checkout(){
-        try {
-            String userOption = helper.getUserInput(INPUT_BOOK_ID);
-            Book checkedBook = checkoutBook(Integer.parseInt(userOption));
-            return checkedBook;
+        try{
+            Book checkedOutBook = (Book) super.checkout();
+            return checkedOutBook;
         }
         catch(Exception e){
             System.out.println(BOOK_NOT_AVAILABLE);
@@ -71,8 +71,7 @@ public class BookCollection extends MediaCollection {
      */
     public Book returnItem(){
         try {
-            String userOption = helper.getUserInput(INPUT_BOOK_ID);
-            Book returnedBook = returnBookProcess(Integer.parseInt(userOption));
+            Book returnedBook = (Book) super.returnItem();
             return returnedBook;
         }
         catch(Exception e){
@@ -82,37 +81,38 @@ public class BookCollection extends MediaCollection {
     }
 
     /**
-     * Perform operation to check out a book from the library
-     * @param idx
+     * Display not available book message
      */
-    public Book checkoutBook(int idx) throws IndexOutOfBoundsException{
-        Book thisBook = (Book) library.get(idx);
-        if(thisBook.getStatus().equals("Available")) {
-            thisBook.setUnavailable();
-            System.out.println(THANK_YOU_ENJOY_BOOK);
-            return thisBook;
-        }
-        else{
-            System.out.println(BOOK_NOT_AVAILABLE);
-            return null;
-        }
+    public void displayNotAvailableMessage(){
+        System.out.println(BOOK_NOT_AVAILABLE);
     }
 
     /**
-     * Performs the returning a book process
-     * @param bookId
+     * Display not valid book to return message
      */
-    public Book returnBookProcess(int bookId) throws IndexOutOfBoundsException{
-        Book thisBook = (Book) library.get(bookId);
-        if(thisBook.getStatus().equals("Unavailable")) {
-            thisBook.setAvailable();
-            System.out.println(THANK_YOU_RETURN_BOOK);
-            return thisBook;
-        }
-        else{
-            System.out.println(NOT_VALID_BOOK_TO_RETURN);
-            return null;
-        }
+    public void displayNotValidItemToReturnMessage(){
+        System.out.println(NOT_VALID_BOOK_TO_RETURN);
+    }
+
+    /**
+     * Display book-specific thank you for checkout message
+     */
+    public void displayThankYouEnjoyMessage(){
+        System.out.println(THANK_YOU_ENJOY_BOOK);
+    }
+
+    /**
+     * Display book-specific thank you for returning message
+     */
+    public void displayThankYouReturnMessage(){
+        System.out.println(THANK_YOU_RETURN_BOOK);
+    }
+
+    /**
+     * Get user input
+     */
+    public String getUserOption() throws IOException{
+        return helper.getUserInput(INPUT_BOOK_ID);
     }
 
 }
