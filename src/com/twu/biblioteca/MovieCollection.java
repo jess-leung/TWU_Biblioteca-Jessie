@@ -8,7 +8,11 @@ import java.io.IOException;
  */
 public class MovieCollection extends MediaCollection {
 
-    private static final String INPUT_MOVIE_ID = "Input a book (id): ";
+    private static final String INPUT_MOVIE_ID = "Input a movie (id): ";
+    private static final String ITEM_NOT_AVAILABLE = "That movie is not available.";
+    private static final String THANK_YOU_ENJOY_MOVIE = "Thank you! Enjoy the movie";
+    private static final String THANK_YOU_RETURN_MOVIE = "Thank you for returning the movie.";
+    private static final String NOT_VALID_MOVIE_TO_RETURN = "That is not a valid movie to return.";
 
     public MovieCollection(){
         super();
@@ -49,7 +53,13 @@ public class MovieCollection extends MediaCollection {
     }
 
     public Movie checkout(){
-        return null;
+        try{
+            return (Movie) super.checkout();
+        }
+        catch(Exception e){
+            displayNotAvailableMessage();
+            return null;
+        }
     }
 
     public Movie returnItem(){
@@ -57,7 +67,7 @@ public class MovieCollection extends MediaCollection {
     }
 
     public void displayNotAvailableMessage(){
-        System.out.println("Not Available");
+        System.out.println(ITEM_NOT_AVAILABLE);
     }
 
 
@@ -65,21 +75,21 @@ public class MovieCollection extends MediaCollection {
      * Display not valid movie to return message
      */
     public void displayNotValidItemToReturnMessage(){
-        System.out.println("Invalid movie to return");
+        System.out.println(NOT_VALID_MOVIE_TO_RETURN);
     }
 
     /**
      * Display movie-specific thank you for checkout message
      */
     public void displayThankYouEnjoyMessage(){
-        System.out.println("Thank you enjoy the movie");
+        System.out.println(THANK_YOU_ENJOY_MOVIE);
     }
 
     /**
      * Display movie-specific thank you for returning message
      */
     public void displayThankYouReturnMessage(){
-        System.out.println("Thank you for returning movie");
+        System.out.println(THANK_YOU_RETURN_MOVIE);
     }
 
     /**

@@ -14,6 +14,23 @@ public class Movie extends MediaItem {
         rating = movieRating;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Movie){
+            Movie m = (Movie) o;
+            if(m.getTitle().equals(title) && m.getDirector().equals(director) &&
+                    m.getYear().equals(year) && m.getRating().equals(rating)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
     public String getDirector(){
         return director;
     }

@@ -74,7 +74,7 @@ public class BibliotecaMovieTests {
         Movie checkoutMovie = moviesLibrary.checkout();
         assertEquals(new Movie("World War Z","Marc Forster","2013","9"),checkoutMovie);
         assertEquals("Unavailable",checkoutMovie.getStatus());
-        assertEquals(2,moviesLibrary.sizeAvailable());
+        assertEquals(3,moviesLibrary.sizeAvailable());
         assertEquals("Input a movie (id):  Thank you! Enjoy the movie\n",outContent.toString());
     }
 
@@ -83,14 +83,14 @@ public class BibliotecaMovieTests {
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         moviesLibrary.checkout();
-        assertEquals(2,moviesLibrary.sizeAvailable());
+        assertEquals(3,moviesLibrary.sizeAvailable());
         assertEquals("Available",moviesLibrary.get(0).getStatus());
         assertEquals("Unavailable",moviesLibrary.get(1).getStatus());
         assertEquals("Available",moviesLibrary.get(2).getStatus());
         data = "2";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         moviesLibrary.checkout();
-        assertEquals(1,moviesLibrary.sizeAvailable());
+        assertEquals(2,moviesLibrary.sizeAvailable());
         assertEquals("Available",moviesLibrary.get(0).getStatus());
         assertEquals("Unavailable",moviesLibrary.get(1).getStatus());
         assertEquals("Unavailable",moviesLibrary.get(2).getStatus());
@@ -112,7 +112,7 @@ public class BibliotecaMovieTests {
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         moviesLibrary.checkout();
         assertEquals("Input a movie (id):  That movie is not available.\n",outContent.toString());
-        assertEquals(2,moviesLibrary.sizeAvailable());
+        assertEquals(3,moviesLibrary.sizeAvailable());
     }
 
 
