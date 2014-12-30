@@ -35,4 +35,12 @@ public class MovieCollection extends MediaCollection {
     public void list(){
 
     }
+
+    public Movie checkout(){
+        return null;
+    }
+
+    public Movie returnItem(){
+        return null;
+    }
 }

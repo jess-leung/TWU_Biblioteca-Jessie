@@ -69,7 +69,7 @@ public class BookCollection extends MediaCollection {
     /**
      * Get user input to return a book
      */
-    public Book returnBook(){
+    public Book returnItem(){
         try {
             String userOption = helper.getUserInput(INPUT_BOOK_ID);
             Book returnedBook = returnBookProcess(Integer.parseInt(userOption));
@@ -115,17 +115,4 @@ public class BookCollection extends MediaCollection {
         }
     }
 
-    /**
-     * Get the size of available library
-     */
-    public int sizeAvailable(){
-        int size = 0;
-        for(MediaItem item:library){
-            Book b = (Book) item;
-            if(b.getStatus().equals("Available")){
-                size+=1;
-            }
-        }
-        return size;
-    }
 }

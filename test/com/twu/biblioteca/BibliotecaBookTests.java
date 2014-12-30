@@ -128,7 +128,7 @@ public class BibliotecaBookTests {
         library.getBook(1).setUnavailable();
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        Book returnedBook = library.returnBook();
+        Book returnedBook = library.returnItem();
         assertEquals(new Book("World War Z", "Max Brooks", "2006"), returnedBook);
         assertEquals("Available",returnedBook.getStatus());
         assertEquals(3,library.sizeAvailable());
@@ -143,13 +143,13 @@ public class BibliotecaBookTests {
 
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        Book returnedBook1 = library.returnBook();
+        Book returnedBook1 = library.returnItem();
         assertEquals("Available", returnedBook1.getStatus());
         assertEquals("Unavailable",checkBook2.getStatus());
         assertEquals(2,library.sizeAvailable());
         data = "2";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        Book returnedBook2 = library.returnBook();
+        Book returnedBook2 = library.returnItem();
         assertEquals("Available", returnedBook1.getStatus());
         assertEquals("Available",returnedBook1.getStatus());
         assertEquals(3,library.sizeAvailable());
@@ -159,7 +159,7 @@ public class BibliotecaBookTests {
     public void shouldDisplayMessageOnNonExistingBookReturn(){
         String data = "123";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        library.returnBook();
+        library.returnItem();
         assertEquals("Input a book (id):  That is not a valid book to return.\n", outContent.toString());
         assertEquals(3,library.sizeAvailable());
     }
@@ -168,7 +168,7 @@ public class BibliotecaBookTests {
     public void shouldDisplayMessageOnInvalidBookReturn(){
         String data = "Not even a number";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        library.returnBook();
+        library.returnItem();
 
         assertEquals("Input a book (id):  That is not a valid book to return.\n", outContent.toString());
         assertEquals(3,library.sizeAvailable());
@@ -178,7 +178,7 @@ public class BibliotecaBookTests {
     public void shouldDisplayMessageOnAlreadyAvailableBookReturn(){
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        library.returnBook();
+        library.returnItem();
 
         assertEquals("Input a book (id):  That is not a valid book to return.\n", outContent.toString());
         assertEquals(3,library.sizeAvailable());

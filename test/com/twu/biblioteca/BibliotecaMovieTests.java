@@ -23,14 +23,10 @@ public class BibliotecaMovieTests {
     public void setUp(){
         app = new BibliotecaApp();
         moviesLibrary = app.getMovieCollection();
-        moviesLibrary.add("Harry Potter and the Philosopher's Stone", "Chris Columbus", "2001","8");
-        moviesLibrary.add("World War Z", "Marc Forster", "2013","9");
-        moviesLibrary.add("The Hours","Stephen Daldry","2002","10");
-        moviesLibrary.add("Godzilla","Gareth Edwards","2014","6");
-        moviesLibrary.add("Zombieland","Ruben Fleischer","2009","10");
-        moviesLibrary.add("Looper","Rian Johnson","2012","Unrated");
-        moviesLibrary.add("How to Lose a Guy in 10 Days","Donald Petrie","2003","5");
-        moviesLibrary.add("Spirited AWay","Hayao Miyazaki","2001","9");
+        moviesLibrary.add("Harry Potter and the Philosopher's Stone", "Chris Columbus", "2001", "8");
+        moviesLibrary.add("World War Z", "Marc Forster", "2013", "9");
+        moviesLibrary.add("Godzilla", "Gareth Edwards", "2014", "Unrated");
+        moviesLibrary.add("Zombieland", "Ruben Fleischer", "2009", "10");
     }
 
     @Before
@@ -58,7 +54,16 @@ public class BibliotecaMovieTests {
 
     @Test
     public void shouldListMoviesOnSelectOfListMovies(){
-
+        moviesLibrary.list();
+        assertEquals(
+            "   0 Harry Potter and the Philosopher's Stone           Chris Columbus" +
+                    "                                     2001 8      \n" +
+                    "   1 World War Z                                        Marc Forster" +
+                    "                                       2013 9      \n" +
+                    "   2 Godzilla                                           Gareth Edwards" +
+                    "                                     2014 Unrated\n"+
+                    "   3 Zombieland                                         Ruben Fleischer"+
+                    "                                    2009 10     \n",outContent.toString());
     }
 
     @Test

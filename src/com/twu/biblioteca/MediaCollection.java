@@ -19,5 +19,27 @@ public abstract class MediaCollection {
      */
     public abstract void list();
 
+    /**
+     * Method to checkout media item from library
+     */
+    public abstract MediaItem checkout();
+
+    /**
+     * Method to return media item from library
+     */
+    public abstract MediaItem returnItem();
+
+    /**
+     * Get the size of available library
+     */
+    public int sizeAvailable(){
+        int size = 0;
+        for(MediaItem item:library){
+            if(item.getStatus().equals("Available")){
+                size+=1;
+            }
+        }
+        return size;
+    }
 
 }

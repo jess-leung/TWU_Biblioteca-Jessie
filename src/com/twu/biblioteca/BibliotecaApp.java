@@ -69,7 +69,7 @@ public class BibliotecaApp {
         } else if(opt.equals("2")){
             bookCollection.checkout();
         } else if(opt.equals("3")){
-            bookCollection.returnBook();
+            bookCollection.returnItem();
         } else if(opt.equals("Q")){
             System.out.print(QUIT_MESSAGE);
             return;
