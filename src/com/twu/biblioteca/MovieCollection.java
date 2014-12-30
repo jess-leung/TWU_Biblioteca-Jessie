@@ -32,8 +32,17 @@ public class MovieCollection extends MediaCollection {
         }
     }
 
+    /**
+     * Get all movies from the movie library
+     */
     public void list(){
-
+        for(MediaItem item:library) {
+            Movie m = (Movie) item;
+            if (m.getStatus().equals("Available")) {
+                System.out.format("%4d %-50s %-50s %-4s %-7s%n", library.indexOf(m), m.getTitle(), m.getDirector(),
+                        m.getYear(), m.getRating());
+            }
+        }
     }
 
     public Movie checkout(){
