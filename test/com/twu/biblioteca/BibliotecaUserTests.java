@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -57,21 +58,23 @@ public class BibliotecaUserTests {
 
     @Test
     public void shouldDisplayMessageOnSuccessfulLogin(){
-        String data = "666-0000\nEvilnessIsAwesome";
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
-        Boolean result = app.requestLogin();
+        Boolean result = app.requestLogin("666-0000","EvilnessIsAwesome");
         assertTrue(result);
-        assertEquals("Username: Password: You are now logged in.\n", outContent.toString());
+        assertEquals("You are now logged in.\n", outContent.toString());
     }
 
     @Test
     public void shouldDisplayMessageOnUnsuccessfulLoginWrongPassword(){
-
+        Boolean result = app.requestLogin("666-0000","EvilnessIsNotAwesome");
+        assertFalse(result);
+        assertEquals("Unsuccessful login.\n", outContent.toString());
     }
 
     @Test
     public void shouldDisplayMessageOnUnsuccessfulLoginUserDoesNotExist(){
-
+        Boolean result = app.requestLogin("666-1234","NotEvenAUser");
+        assertFalse(result);
+        assertEquals("Unsuccessful login.\n", outContent.toString());
     }
 
     @Test
