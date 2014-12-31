@@ -24,6 +24,7 @@ public class BibliotecaApp {
 
     /**
      * Method to set up static library (adding and deleting books not supported)
+     * Adding and deleting users also not supported.
      */
     public void setUp(){
         bookCollection.add("Harry Potter and the Philosopher's Stone", "JK Rowling", "1997");
@@ -33,6 +34,9 @@ public class BibliotecaApp {
         movieCollection.add("World War Z", "Marc Forster", "2013", "9");
         movieCollection.add("Godzilla", "Gareth Edwards", "2014", "Unrated");
         movieCollection.add("Zombieland", "Ruben Fleischer", "2009", "10");
+        users.add(new Customer("Harry Potter","hp@hogwarts.com","94123456","123-4567","Hogwarts"));
+        users.add(new Customer("Voldemort","thedarklord@evilempire.com","93413233","666-0000","EvilnessIsAwesome"));
+        users.add(new Customer("Gandalf","thegrey@lotr.com","93231233","0123-4123","YouShallNotPass"));
     }
 
     /**
@@ -76,15 +80,23 @@ public class BibliotecaApp {
     }
 
     /**
-     * Choose a menu option
+     * Choose a menu option. Assume no user login required for checkout or returning movies (not in requirements).
      */
     public void selectOption(String opt) {
         if (opt.equals("1")) {
             bookCollection.list();
-        } else if(opt.equals("2")){
-            bookCollection.checkout(currentUser);
-        } else if(opt.equals("3")){
-            bookCollection.returnItem();
+        } else if(opt.equals("2") || opt.equals("3")){
+            if(currentUser.equals("None")){
+                userLogin();
+            }
+            if(!currentUser.equals("None")){
+                if(opt.equals("2")){
+                    bookCollection.checkout(currentUser);
+                }
+                if(opt.equals("3")){
+                    bookCollection.returnItem();
+                }
+            }
         } else if(opt.equals("4")){
             movieCollection.list();
         } else if(opt.equals("5")){
@@ -97,14 +109,20 @@ public class BibliotecaApp {
         }
     }
 
-    public void userLogin(){
+    public Boolean userLogin(){
         try {
             String thisNumber = helper.getUserInput("Library Number: ");
             String thisPassword = helper.getUserInput("Password: ");
             Boolean result = requestLogin(thisNumber, thisPassword);
+            if(result == true){
+                currentUser = thisNumber;
+                return true;
+            }
+            return false;
         }
         catch(Exception e){
             System.out.println("Unsuccessful login.");
+            return false;
         }
     }
 
