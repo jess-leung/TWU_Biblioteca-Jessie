@@ -63,7 +63,14 @@ public class MovieCollection extends MediaCollection {
     }
 
     public Movie returnItem(){
-        return null;
+        try {
+            Movie returnedMovie = (Movie) super.returnItem();
+            return returnedMovie;
+        }
+        catch(Exception e){
+            System.out.println(NOT_VALID_MOVIE_TO_RETURN);
+            return null;
+        }
     }
 
     public void displayNotAvailableMessage(){
