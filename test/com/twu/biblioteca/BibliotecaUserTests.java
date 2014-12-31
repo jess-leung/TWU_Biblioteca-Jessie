@@ -84,8 +84,9 @@ public class BibliotecaUserTests {
 
     @Test
     public void shouldHaveCustomerAssociatedWithBookTheyHaveCheckedOut(){
-        app.setCurrentUser("123-4567");
-        Book thisBook = (Book) library.checkoutItem(1);
+        String data = "1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        Book thisBook = (Book) library.checkout("123-4567");
         assertEquals("123-4567",thisBook.getCurrentBorrower());
     }
 

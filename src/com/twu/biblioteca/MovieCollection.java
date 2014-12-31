@@ -52,9 +52,9 @@ public class MovieCollection extends MediaCollection {
         }
     }
 
-    public Movie checkout(){
+    public Movie checkout(String currentUser){
         try{
-            return (Movie) super.checkout();
+            return (Movie) super.checkout(currentUser);
         }
         catch(Exception e){
             displayNotAvailableMessage();

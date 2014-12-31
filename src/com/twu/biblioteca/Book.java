@@ -6,6 +6,7 @@ package com.twu.biblioteca;
 public class Book extends MediaItem {
 
     private String author;
+    private String currentBorrower;
 
     public Book(String bookTitle, String bookAuthor, String bookYear){
         super(bookTitle,bookYear);
@@ -28,8 +29,12 @@ public class Book extends MediaItem {
         }
     }
 
+    public void setCurrentBorrower(String libraryNumber){
+        currentBorrower = libraryNumber;
+    }
+
     public String getCurrentBorrower(){
-        return "123-4567";
+        return currentBorrower;
     }
 
     public String getAuthor(){

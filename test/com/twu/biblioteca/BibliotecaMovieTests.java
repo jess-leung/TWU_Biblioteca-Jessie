@@ -71,7 +71,7 @@ public class BibliotecaMovieTests {
     public void shouldHaveCorrectMovieDetailsOnCheckout(){
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        Movie checkoutMovie = moviesLibrary.checkout();
+        Movie checkoutMovie = moviesLibrary.checkout("None");
         assertEquals(new Movie("World War Z","Marc Forster","2013","9"),checkoutMovie);
         assertEquals("Unavailable",checkoutMovie.getStatus());
         assertEquals(3,moviesLibrary.sizeAvailable());
@@ -82,14 +82,14 @@ public class BibliotecaMovieTests {
     public void shouldHaveCorrectMovieDetailsOnMulitpleCheckouts(){
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        moviesLibrary.checkout();
+        moviesLibrary.checkout("None");
         assertEquals(3,moviesLibrary.sizeAvailable());
         assertEquals("Available",moviesLibrary.get(0).getStatus());
         assertEquals("Unavailable",moviesLibrary.get(1).getStatus());
         assertEquals("Available",moviesLibrary.get(2).getStatus());
         data = "2";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        moviesLibrary.checkout();
+        moviesLibrary.checkout("None");
         assertEquals(2,moviesLibrary.sizeAvailable());
         assertEquals("Available",moviesLibrary.get(0).getStatus());
         assertEquals("Unavailable",moviesLibrary.get(1).getStatus());
@@ -100,7 +100,7 @@ public class BibliotecaMovieTests {
     public void shouldDisplayMessageOnNonExistingMovieCheckout(){
         String data = "123";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        moviesLibrary.checkout();
+        moviesLibrary.checkout("None");
         assertEquals("Input a movie (id):  That movie is not available.\n",outContent.toString());
     }
 
@@ -110,7 +110,7 @@ public class BibliotecaMovieTests {
         moviesLibrary.get(1).setUnavailable();
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        moviesLibrary.checkout();
+        moviesLibrary.checkout("None");
         assertEquals("Input a movie (id):  That movie is not available.\n",outContent.toString());
         assertEquals(3,moviesLibrary.sizeAvailable());
     }

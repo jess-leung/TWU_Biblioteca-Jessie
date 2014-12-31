@@ -19,7 +19,7 @@ public class BibliotecaApp {
         movieCollection = new MovieCollection();
         users = new UsersList();
         helper = new IOHelper();
-        currentUser = "Not logged in";
+        currentUser = "None";
     }
 
     /**
@@ -82,13 +82,13 @@ public class BibliotecaApp {
         if (opt.equals("1")) {
             bookCollection.list();
         } else if(opt.equals("2")){
-            bookCollection.checkout();
+            bookCollection.checkout(currentUser);
         } else if(opt.equals("3")){
             bookCollection.returnItem();
         } else if(opt.equals("4")){
             movieCollection.list();
         } else if(opt.equals("5")){
-            movieCollection.checkout();
+            movieCollection.checkout(currentUser);
         } else if(opt.equals("Q")){
             System.out.print(QUIT_MESSAGE);
             return;
@@ -119,9 +119,12 @@ public class BibliotecaApp {
     }
 
     public void setCurrentUser(String libraryNumber){
-        currentUser = "123-4567";
+        currentUser = libraryNumber;
     }
 
+    public String getCurrentUser(){
+        return currentUser;
+    }
 
     /**
      * Get book collection

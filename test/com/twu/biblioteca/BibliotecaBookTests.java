@@ -78,7 +78,7 @@ public class BibliotecaBookTests {
     public void shouldHaveCorrectLibraryDetailsAfterCheckout(){
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        Book checkoutBook = library.checkout();
+        Book checkoutBook = library.checkout("123-4567");
         assertEquals(new Book("World War Z","Max Brooks","2006"),checkoutBook);
         assertEquals("Unavailable",checkoutBook.getStatus());
         assertEquals(2,library.sizeAvailable());
@@ -89,14 +89,14 @@ public class BibliotecaBookTests {
     public void shouldHaveCorrectLibraryDetailsAfterMultipleCheckouts(){
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        library.checkout();
+        library.checkout("123-4567");
         assertEquals(2,library.sizeAvailable());
         assertEquals("Available",library.getBook(0).getStatus());
         assertEquals("Unavailable",library.getBook(1).getStatus());
         assertEquals("Available",library.getBook(2).getStatus());
         data = "2";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        library.checkout();
+        library.checkout("123-4567");
         assertEquals(1,library.sizeAvailable());
         assertEquals("Available",library.getBook(0).getStatus());
         assertEquals("Unavailable",library.getBook(1).getStatus());
@@ -107,7 +107,7 @@ public class BibliotecaBookTests {
     public void shouldDisplayMessageIfRequestedBookForCheckoutDoesNotExist(){
         String data = "123";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        library.checkout();
+        library.checkout("123-4567");
         assertEquals("Input a book (id):  That book is not available.\n",outContent.toString());
     }
 
@@ -117,7 +117,7 @@ public class BibliotecaBookTests {
         library.getBook(1).setUnavailable();
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        library.checkout();
+        library.checkout("123-4567");
         assertEquals("Input a book (id):  That book is not available.\n",outContent.toString());
         assertEquals(2,library.sizeAvailable());
     }

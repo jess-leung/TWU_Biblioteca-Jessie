@@ -55,9 +55,12 @@ public class BookCollection extends MediaCollection {
      * Check out a book
      * @return
      */
-    public Book checkout(){
+    public Book checkout(String currentUser){
         try{
-            Book checkedOutBook = (Book) super.checkout();
+            Book checkedOutBook = (Book) super.checkout(currentUser);
+            if(checkedOutBook!=null) {
+                checkedOutBook.setCurrentBorrower(currentUser);
+            }
             return checkedOutBook;
         }
         catch(Exception e){

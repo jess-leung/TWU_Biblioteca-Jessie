@@ -37,7 +37,7 @@ public abstract class MediaCollection {
      * Check out a book
      * @return
      */
-    public MediaItem checkout() throws Exception{
+    public MediaItem checkout(String currentUser) throws Exception{
         String userOption = getUserOption();
         MediaItem checkedItem = checkoutItem(Integer.parseInt(userOption));
         return checkedItem;
