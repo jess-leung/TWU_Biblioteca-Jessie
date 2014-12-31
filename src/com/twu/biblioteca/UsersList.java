@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class UsersList {
 
-    ArrayList<User> users;
+    private ArrayList<User> users;
 
     public UsersList(){
         users = new ArrayList<User>();
@@ -25,5 +25,9 @@ public class UsersList {
      */
     public User get(int idx){
         return users.get(idx);
+    }
+
+    public Boolean contains(User u){
+        return users.contains(u);
     }
 }

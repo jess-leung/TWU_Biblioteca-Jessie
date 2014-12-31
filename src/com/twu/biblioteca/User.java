@@ -22,4 +22,19 @@ public class User {
         return password;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof User){
+            User u = (User) o;
+            if(u.getLibraryNumber().equals(libraryNumber) && u.getPassword().equals(password)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
 }

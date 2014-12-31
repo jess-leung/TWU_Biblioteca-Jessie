@@ -95,6 +95,29 @@ public class BibliotecaApp {
         }
     }
 
+    public void userLogin(){
+        try {
+            String thisNumber = helper.getUserInput("Library Number: ");
+            String thisPassword = helper.getUserInput("Password: ");
+            Boolean result = requestLogin(thisNumber, thisPassword);
+        }
+        catch(Exception e){
+            System.out.println("Unsuccessful login.");
+        }
+    }
+
+    public Boolean requestLogin(String libraryNumber, String password){
+        User thisUser = new User(libraryNumber, password);
+        if (users.contains(thisUser)){
+            System.out.println("You are now logged in.");
+            return true;
+        }
+        System.out.println("Unsuccessful login.");
+        return false;
+    }
+
+
+
     /**
      * Get book collection
      */

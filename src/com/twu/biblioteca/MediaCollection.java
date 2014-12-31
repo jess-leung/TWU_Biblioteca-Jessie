@@ -75,8 +75,6 @@ public abstract class MediaCollection {
         }
     }
 
-
-
     /**
      * Performs the returning an item process
      */
