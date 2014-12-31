@@ -30,4 +30,6 @@ public class UsersList {
     public Boolean contains(User u){
         return users.contains(u);
     }
+
+    public int indexOf(User u){ return users.indexOf(u); }
 }

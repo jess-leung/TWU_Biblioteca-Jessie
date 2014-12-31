@@ -57,6 +57,8 @@ public class BibliotecaAppTests {
                 "4. List Movies\n"+
                 "5. Checkout Movie\n"+
                 "----------------------------\n"+
+                "D. Display Customer Details\n"+
+                "L. User Login\n"+
                 "Q. Quit\n"+
                 "----------------------------\n",outContent.toString());
     }

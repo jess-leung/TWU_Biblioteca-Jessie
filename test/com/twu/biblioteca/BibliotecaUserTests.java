@@ -9,9 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by jessieleung on 31/12/14.
@@ -63,22 +61,20 @@ public class BibliotecaUserTests {
 
     @Test
     public void shouldDisplayMessageOnSuccessfulLogin(){
-        Boolean result = app.requestLogin("666-0000","EvilnessIsAwesome");
-        assertTrue(result);
+        User u = app.requestLogin("666-0000","EvilnessIsAwesome");
+        assertEquals(u,users.get(1));
         assertEquals("You are now logged in.\n", outContent.toString());
     }
 
     @Test
     public void shouldDisplayMessageOnUnsuccessfulLoginWrongPassword(){
-        Boolean result = app.requestLogin("666-0000","EvilnessIsNotAwesome");
-        assertFalse(result);
+        app.requestLogin("666-0000","EvilnessIsNotAwesome");
         assertEquals("Unsuccessful login.\n", outContent.toString());
     }
 
     @Test
     public void shouldDisplayMessageOnUnsuccessfulLoginUserDoesNotExist(){
-        Boolean result = app.requestLogin("666-1234","NotEvenAUser");
-        assertFalse(result);
+        app.requestLogin("666-1234","NotEvenAUser");
         assertEquals("Unsuccessful login.\n", outContent.toString());
     }
 
@@ -108,14 +104,15 @@ public class BibliotecaUserTests {
 
     @Test
     public void shouldDisplayCustomerDetailsWhenLoggedIn(){
-        app.setCurrentUser("123-4567");
+        app.setCurrentUser(users.get(0));
         app.displayCustomerDetails();
         assertEquals("Customer Details: Harry Potter, hp@hogwarts.com, 94123456\n", outContent.toString());
     }
 
     @Test
     public void shouldNotDisplayCustomerDetailsWhenNotLoggedIn(){
-        app.displayCustomerDetails();
+        app.setCurrentUser(null);
+        app.selectOption("D");
         assertEquals("You are not logged in.\n", outContent.toString());
     }
 

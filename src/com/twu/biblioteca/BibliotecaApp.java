@@ -8,7 +8,7 @@ public class BibliotecaApp {
     private MovieCollection movieCollection;
     private UsersList users;
     private IOHelper helper;
-    private String currentUser;
+    private User currentUser;
     private static final String SELECT_VALID_OPTION = "Select a valid option!";
     private static final String SELECT_AN_OPTION = "Select an option: ";
     private static final String WELCOME = "Welcome to Biblioteca";
@@ -19,7 +19,7 @@ public class BibliotecaApp {
         movieCollection = new MovieCollection();
         users = new UsersList();
         helper = new IOHelper();
-        currentUser = "None";
+        currentUser = null;
     }
 
     /**
@@ -59,6 +59,8 @@ public class BibliotecaApp {
         System.out.println("4. List Movies");
         System.out.println("5. Checkout Movie");
         System.out.println("----------------------------");
+        System.out.println("D. Display Customer Details");
+        System.out.println("L. User Login");
         System.out.println("Q. Quit");
         System.out.println("----------------------------");
     }
@@ -85,22 +87,27 @@ public class BibliotecaApp {
     public void selectOption(String opt) {
         if (opt.equals("1")) {
             bookCollection.list();
-        } else if(opt.equals("2") || opt.equals("3")){
-            if(currentUser.equals("None")){
-                userLogin();
-            }
-            if(!currentUser.equals("None")){
+        } else if(opt.equals("2") || opt.equals("3") || opt.equals("D")){
+            if(currentUser!=null){
                 if(opt.equals("2")){
-                    bookCollection.checkout(currentUser);
+                    bookCollection.checkout(currentUser.getLibraryNumber());
                 }
                 if(opt.equals("3")){
                     bookCollection.returnItem();
                 }
+                if(opt.equals("D")){
+                    displayCustomerDetails();
+                }
+            }
+            else{
+                System.out.println("You are not logged in.");
             }
         } else if(opt.equals("4")){
             movieCollection.list();
         } else if(opt.equals("5")){
-            movieCollection.checkout(currentUser);
+            movieCollection.checkout(currentUser.getLibraryNumber());
+        } else if(opt.equals("L")){
+            userLogin();
         } else if(opt.equals("Q")){
             System.out.print(QUIT_MESSAGE);
             return;
@@ -113,9 +120,9 @@ public class BibliotecaApp {
         try {
             String thisNumber = helper.getUserInput("Library Number: ");
             String thisPassword = helper.getUserInput("Password: ");
-            Boolean result = requestLogin(thisNumber, thisPassword);
-            if(result == true){
-                currentUser = thisNumber;
+            User u = requestLogin(thisNumber, thisPassword);
+            if(u != null){
+                currentUser = u;
                 return true;
             }
             return false;
@@ -126,21 +133,31 @@ public class BibliotecaApp {
         }
     }
 
-    public Boolean requestLogin(String libraryNumber, String password){
+    public User requestLogin(String libraryNumber, String password){
         User thisUser = new User(libraryNumber, password);
         if (users.contains(thisUser)){
             System.out.println("You are now logged in.");
-            return true;
+            return users.get(users.indexOf(thisUser));
         }
         System.out.println("Unsuccessful login.");
-        return false;
+        return null;
     }
 
-    public void setCurrentUser(String libraryNumber){
-        currentUser = libraryNumber;
+    public void displayCustomerDetails(){
+        if(currentUser instanceof Customer){
+            Customer thisCustomer = (Customer) currentUser;
+            System.out.println("Customer Details: "+thisCustomer.getName()+", "+thisCustomer.getEmail()+", "+thisCustomer.getContactNumber());
+        }
+        else{
+            System.out.println("You are not a customer.");
+        }
     }
 
-    public String getCurrentUser(){
+    public void setCurrentUser(User u){
+        currentUser = u;
+    }
+
+    public User getCurrentUser(){
         return currentUser;
     }
 
