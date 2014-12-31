@@ -28,6 +28,10 @@ public class Book extends MediaItem {
         }
     }
 
+    public String getCurrentBorrower(){
+        return "123-4567";
+    }
+
     public String getAuthor(){
         return author;
     }

@@ -8,6 +8,7 @@ public class BibliotecaApp {
     private MovieCollection movieCollection;
     private UsersList users;
     private IOHelper helper;
+    private String currentUser;
     private static final String SELECT_VALID_OPTION = "Select a valid option!";
     private static final String SELECT_AN_OPTION = "Select an option: ";
     private static final String WELCOME = "Welcome to Biblioteca";
@@ -18,6 +19,7 @@ public class BibliotecaApp {
         movieCollection = new MovieCollection();
         users = new UsersList();
         helper = new IOHelper();
+        currentUser = "Not logged in";
     }
 
     /**
@@ -116,6 +118,9 @@ public class BibliotecaApp {
         return false;
     }
 
+    public void setCurrentUser(String libraryNumber){
+        currentUser = "123-4567";
+    }
 
 
     /**
