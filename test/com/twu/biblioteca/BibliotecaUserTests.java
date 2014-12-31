@@ -23,10 +23,10 @@ public class BibliotecaUserTests {
     public void setUp(){
         app = new BibliotecaApp();
         users = app.getUsers();
-        users.add("Harry Potter","hp@hogwarts.com","94123456","Customer","123-4567","Scarhead");
-        users.add("Voldemort","thedarklord@evilempire.com","Customer","93413233","666-0000","EvilnessIsAwesome");
-        users.add("Gandalf","thegrey@lotr.com","93231233","Customer","0123-4123","YouShallNotPass");
-        users.add("Katniss","katniss@hungergames.com","Librarian","94567823","369-1357","District12");
+        users.add(new Customer("Harry Potter","hp@hogwarts.com","94123456","123-4567","Scarhead"));
+        users.add(new Customer("Voldemort","thedarklord@evilempire.com","93413233","666-0000","EvilnessIsAwesome"));
+        users.add(new Customer("Gandalf","thegrey@lotr.com","93231233","0123-4123","YouShallNotPass"));
+        users.add(new Librarian("94567823","369-1357"));
     }
 
     @Before
@@ -45,10 +45,9 @@ public class BibliotecaUserTests {
 
     @Test
     public void shouldHaveCorrectUserWhenRetrievingUser(){
-        User chosenUser = users.get(1);
+        Customer chosenUser = (Customer) users.get(1);
         assertEquals("Voldemort",chosenUser.getName());
         assertEquals("thedarklord@evilempire.com",chosenUser.getEmail());
-        assertEquals("Customer",chosenUser.getType());
         assertEquals("93413233",chosenUser.getContactNumber());
         assertEquals("666-0000",chosenUser.getLibraryNumber());
         assertEquals("EvilnessIsAwesome",chosenUser.getPassword());

@@ -16,6 +16,7 @@ public class BibliotecaApp {
     public BibliotecaApp(){
         bookCollection = new BookCollection();
         movieCollection = new MovieCollection();
+        users = new UsersList();
         helper = new IOHelper();
     }
 

@@ -10,20 +10,20 @@ public class UsersList {
     ArrayList<User> users;
 
     public UsersList(){
-
+        users = new ArrayList<User>();
     }
 
     /**
      * Add a user to users list
      */
-    public void add(String name, String email, String number, String type, String libraryNumber, String password){
-
+    public void add(User u){
+        users.add(u);
     }
 
     /**
      * Retrieve a user from the list of users given index
      */
     public User get(int idx){
-        return null;
+        return users.get(idx);
     }
 }

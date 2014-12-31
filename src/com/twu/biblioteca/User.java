@@ -5,38 +5,21 @@ package com.twu.biblioteca;
  */
 public class User {
 
-    private String name;
-    private String email;
-    private String contactNumber;
     private String libraryNumber;
     private String password;
-    private String type;
 
-    public User(){
-
+    public User(String library, String password){
+        this.libraryNumber = library;
+        this.password = password;
     }
 
-    public String getName(){
-        return "";
-    }
-
-    public String getEmail(){
-        return "";
-    }
-
-    public String getContactNumber(){
-        return "";
-    }
 
     public String getLibraryNumber(){
-        return "";
+        return libraryNumber;
     }
 
     public String getPassword(){
-        return "";
+        return password;
     }
 
-    public String getType(){
-        return "";
-    }
 }
