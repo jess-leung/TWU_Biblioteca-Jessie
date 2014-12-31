@@ -115,5 +115,67 @@ public class BibliotecaMovieTests {
         assertEquals(3,moviesLibrary.sizeAvailable());
     }
 
+    @Test
+    public void shouldHaveCorrectLibraryDetailsAfterReturnMovie(){
+        // Simulate checked out book
+        moviesLibrary.get(1).setUnavailable();
+        String data = "1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        Movie returnedMovie = moviesLibrary.returnItem();
+        assertEquals(new Book("World War Z", "Max Brooks", "2006"), returnedMovie);
+        assertEquals("Available",returnedMovie.getStatus());
+        assertEquals(3,moviesLibrary.sizeAvailable());
+        assertEquals("Input a movie (id):  Thank you for returning the movie.\n",outContent.toString());
+    }
+
+    @Test
+    public void shouldHaveCorrectLibraryDetailsAfterReturnMultipleMovie(){
+        // Simulate checked out books
+        Movie checkMovie1 = (Movie) moviesLibrary.checkoutItem(1);
+        Movie checkMovie2 = (Movie) moviesLibrary.checkoutItem(2);
+
+        String data = "1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        Movie returnedMovie1 = moviesLibrary.returnItem();
+        assertEquals("Available", returnedMovie1.getStatus());
+        assertEquals("Unavailable",checkMovie2.getStatus());
+        assertEquals(3,moviesLibrary.sizeAvailable());
+        data = "2";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        Movie returnedMovie2 = moviesLibrary.returnItem();
+        assertEquals("Available", returnedMovie1.getStatus());
+        assertEquals("Available",returnedMovie2.getStatus());
+        assertEquals(4,moviesLibrary.sizeAvailable());
+    }
+
+    @Test
+    public void shouldDisplayMessageOnNonExistingMovieReturn(){
+        String data = "123";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        moviesLibrary.returnItem();
+        assertEquals("Input a movie (id):  That is not a valid movie to return.\n", outContent.toString());
+        assertEquals(4,moviesLibrary.sizeAvailable());
+    }
+
+    @Test
+    public void shouldDisplayMessageOnInvalidBookReturn(){
+        String data = "Not even a number";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        moviesLibrary.returnItem();
+
+        assertEquals("Input a movie (id):  That is not a valid movie to return.\n", outContent.toString());
+        assertEquals(4,moviesLibrary.sizeAvailable());
+    }
+
+    @Test
+    public void shouldDisplayMessageOnAlreadyAvailableMovieReturn(){
+        String data = "1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        moviesLibrary.returnItem();
+
+        assertEquals("Input a movie (id):  That is not a valid movie to return.\n", outContent.toString());
+        assertEquals(3,moviesLibrary.sizeAvailable());
+    }
+
 
 }

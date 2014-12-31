@@ -96,12 +96,6 @@ public class BibliotecaUserTests {
         assertEquals("None",thisBook.getCurrentBorrower());
     }
 
-
-    @Test
-    public void shouldDisplayCustomerOnBookListOnlyForLibrarians(){
-
-    }
-
     @Test
     public void shouldDisplayCustomerDetailsWhenLoggedIn(){
         app.setCurrentUser(users.get(0));
