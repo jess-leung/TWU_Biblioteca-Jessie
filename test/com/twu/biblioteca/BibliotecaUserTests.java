@@ -27,7 +27,7 @@ public class BibliotecaUserTests {
     public void setUp(){
         app = new BibliotecaApp();
         users = app.getUsers();
-        users.add(new Customer("Harry Potter","hp@hogwarts.com","94123456","123-4567","Scarhead"));
+        users.add(new Customer("Harry Potter","hp@hogwarts.com","94123456","123-4567","Hogwarts"));
         users.add(new Customer("Voldemort","thedarklord@evilempire.com","93413233","666-0000","EvilnessIsAwesome"));
         users.add(new Customer("Gandalf","thegrey@lotr.com","93231233","0123-4123","YouShallNotPass"));
         users.add(new Librarian("94567823","369-1357"));
@@ -108,7 +108,15 @@ public class BibliotecaUserTests {
 
     @Test
     public void shouldDisplayCustomerDetailsWhenLoggedIn(){
+        app.setCurrentUser("123-4567");
+        app.displayCustomerDetails();
+        assertEquals("Customer Details: Harry Potter, hp@hogwarts.com, 94123456\n", outContent.toString());
+    }
 
+    @Test
+    public void shouldNotDisplayCustomerDetailsWhenNotLoggedIn(){
+        app.displayCustomerDetails();
+        assertEquals("You are not logged in.\n", outContent.toString());
     }
 
 }
