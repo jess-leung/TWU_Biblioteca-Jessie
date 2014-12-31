@@ -11,6 +11,7 @@ public class Book extends MediaItem {
     public Book(String bookTitle, String bookAuthor, String bookYear){
         super(bookTitle,bookYear);
         author = bookAuthor;
+        currentBorrower = "None";
     }
 
     @Override

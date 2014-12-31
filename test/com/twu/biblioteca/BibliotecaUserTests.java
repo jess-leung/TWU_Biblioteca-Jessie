@@ -92,8 +92,9 @@ public class BibliotecaUserTests {
 
     @Test
     public void shouldNotHaveCustomerAssociatedWithBookTheyHaveReturned(){
-        library.getBook(1).setUnavailable();
         String data = "1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        library.checkout("123-4567");
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         Book thisBook = (Book) library.returnItem();
         assertEquals("None",thisBook.getCurrentBorrower());
