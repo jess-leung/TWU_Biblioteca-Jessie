@@ -52,6 +52,9 @@ public class MovieCollection extends MediaCollection {
         }
     }
 
+    /**
+     * Check out a movie
+     */
     public Movie checkout(String currentUser){
         try{
             return (Movie) super.checkout(currentUser);
@@ -62,6 +65,9 @@ public class MovieCollection extends MediaCollection {
         }
     }
 
+    /**
+     * Return a movie
+     */
     public Movie returnItem(){
         try {
             Movie returnedMovie = (Movie) super.returnItem();
@@ -73,6 +79,9 @@ public class MovieCollection extends MediaCollection {
         }
     }
 
+    /**
+     * Display not available movie to checkout message
+     */
     public void displayNotAvailableMessage(){
         System.out.println(ITEM_NOT_AVAILABLE);
     }

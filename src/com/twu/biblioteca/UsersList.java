@@ -27,9 +27,15 @@ public class UsersList {
         return users.get(idx);
     }
 
+    /**
+     * Check if the user exists in our app
+     */
     public Boolean contains(User u){
         return users.contains(u);
     }
 
+    /**
+     * Get index of user in app
+     */
     public int indexOf(User u){ return users.indexOf(u); }
 }

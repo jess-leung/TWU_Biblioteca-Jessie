@@ -9,10 +9,15 @@ public class BibliotecaApp {
     private UsersList users;
     private IOHelper helper;
     private User currentUser;
+
     private static final String SELECT_VALID_OPTION = "Select a valid option!";
     private static final String SELECT_AN_OPTION = "Select an option: ";
     private static final String WELCOME = "Welcome to Biblioteca";
     private static final String QUIT_MESSAGE = "Quitting Biblioteca";
+    private static final String UNSUCCESSFUL_LOGIN = "Unsuccessful login.";
+    private static final String NOT_LOGGED_IN = "You are not logged in.";
+    private static final String LOGGED_IN = "You are now logged in.";
+    private static final String NOT_A_CUSTOMER = "You are not a customer.";
 
     public BibliotecaApp(){
         bookCollection = new BookCollection();
@@ -101,7 +106,7 @@ public class BibliotecaApp {
                 }
             }
             else{
-                System.out.println("You are not logged in.");
+                System.out.println(NOT_LOGGED_IN);
             }
         } else if(opt.equals("4")){
             movieCollection.list();
@@ -119,6 +124,9 @@ public class BibliotecaApp {
         }
     }
 
+    /**
+     * Get the user to login
+     */
     public Boolean userLogin(){
         try {
             String thisNumber = helper.getUserInput("Library Number: ");
@@ -131,35 +139,47 @@ public class BibliotecaApp {
             return false;
         }
         catch(Exception e){
-            System.out.println("Unsuccessful login.");
+            System.out.println(UNSUCCESSFUL_LOGIN);
             return false;
         }
     }
 
+    /**
+     * Check if login is valid
+     */
     public User requestLogin(String libraryNumber, String password){
         User thisUser = new User(libraryNumber, password);
         if (users.contains(thisUser)){
-            System.out.println("You are now logged in.");
+            System.out.println(LOGGED_IN);
             return users.get(users.indexOf(thisUser));
         }
-        System.out.println("Unsuccessful login.");
+        System.out.println(UNSUCCESSFUL_LOGIN);
         return null;
     }
 
+    /**
+     * Display customer details if logged in and customer
+     */
     public void displayCustomerDetails(){
         if(currentUser instanceof Customer){
             Customer thisCustomer = (Customer) currentUser;
             System.out.println("Customer Details: "+thisCustomer.getName()+", "+thisCustomer.getEmail()+", "+thisCustomer.getContactNumber());
         }
         else{
-            System.out.println("You are not a customer.");
+            System.out.println(NOT_A_CUSTOMER);
         }
     }
 
+    /**
+     * Set current user of app
+     */
     public void setCurrentUser(User u){
         currentUser = u;
     }
 
+    /**
+     * Get the current user of app
+     */
     public User getCurrentUser(){
         return currentUser;
     }
