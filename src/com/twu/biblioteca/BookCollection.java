@@ -75,6 +75,9 @@ public class BookCollection extends MediaCollection {
     public Book returnItem(){
         try {
             Book returnedBook = (Book) super.returnItem();
+            if(returnedBook!=null) {
+                returnedBook.setCurrentBorrower("None");
+            }
             return returnedBook;
         }
         catch(Exception e){
