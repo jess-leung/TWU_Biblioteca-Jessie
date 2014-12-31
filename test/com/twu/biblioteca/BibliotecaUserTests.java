@@ -19,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 public class BibliotecaUserTests {
 
     BibliotecaApp app;
+    BookCollection library;
     UsersList users;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -30,6 +31,10 @@ public class BibliotecaUserTests {
         users.add(new Customer("Voldemort","thedarklord@evilempire.com","93413233","666-0000","EvilnessIsAwesome"));
         users.add(new Customer("Gandalf","thegrey@lotr.com","93231233","0123-4123","YouShallNotPass"));
         users.add(new Librarian("94567823","369-1357"));
+        library = app.getBookCollection();
+        library.add("Harry Potter and the Philosopher's Stone", "JK Rowling", "1997");
+        library.add("World War Z", "Max Brooks", "2006");
+        library.add("Artificial Intelligence", "Peter Norvig and Stuart J. Russell", "1994");
     }
 
     @Before
@@ -78,7 +83,14 @@ public class BibliotecaUserTests {
     }
 
     @Test
-    public void shouldDisplayCustomerOnBookListOnlyForLibraries(){
+    public void shouldHaveCustomerAssociatedWithBookTheyHaveCheckedOut(){
+        app.setCurrentUser("Harry Potter");
+        Book thisBook = (Book) library.checkoutItem(1);
+        assertEquals("Harry Potter",thisBook.getCurrentBorrower());
+    }
+
+    @Test
+    public void shouldDisplayCustomerOnBookListOnlyForLibrarians(){
 
     }
 
