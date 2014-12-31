@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by jessieleung on 31/12/14.
@@ -58,8 +59,8 @@ public class BibliotecaUserTests {
     public void shouldDisplayMessageOnSuccessfulLogin(){
         String data = "666-0000\nEvilnessIsAwesome";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        app.requestLogin();
-
+        Boolean result = app.requestLogin();
+        assertTrue(result);
         assertEquals("Username: Password: You are now logged in.\n", outContent.toString());
     }
 
