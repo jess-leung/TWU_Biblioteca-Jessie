@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -55,7 +56,11 @@ public class BibliotecaUserTests {
 
     @Test
     public void shouldDisplayMessageOnSuccessfulLogin(){
+        String data = "666-0000\nEvilnessIsAwesome";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        app.requestLogin();
 
+        assertEquals("Username: Password: You are now logged in.\n", outContent.toString());
     }
 
     @Test
