@@ -55,7 +55,7 @@ public class BibliotecaAppTests {
                 "1. List Books\n2. Checkout Book\n3. Return Book\n"+
                 "-----------Movies-----------\n"+
                 "4. List Movies\n"+
-                "5. Checkout Movie\n"+
+                "5. Checkout Movie\n6. Return Movie\n"+
                 "----------------------------\n"+
                 "D. Display Customer Details\n"+
                 "L. User Login\n"+

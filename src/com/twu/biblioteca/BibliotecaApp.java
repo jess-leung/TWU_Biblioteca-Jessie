@@ -58,6 +58,7 @@ public class BibliotecaApp {
         System.out.println("-----------Movies-----------");
         System.out.println("4. List Movies");
         System.out.println("5. Checkout Movie");
+        System.out.println("6. Return Movie");
         System.out.println("----------------------------");
         System.out.println("D. Display Customer Details");
         System.out.println("L. User Login");
@@ -105,7 +106,9 @@ public class BibliotecaApp {
         } else if(opt.equals("4")){
             movieCollection.list();
         } else if(opt.equals("5")){
-            movieCollection.checkout(currentUser.getLibraryNumber());
+            movieCollection.checkout("None");
+        } else if(opt.equals("6")){
+            movieCollection.returnItem();
         } else if(opt.equals("L")){
             userLogin();
         } else if(opt.equals("Q")){
