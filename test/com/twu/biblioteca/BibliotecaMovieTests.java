@@ -122,9 +122,9 @@ public class BibliotecaMovieTests {
         String data = "1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         Movie returnedMovie = moviesLibrary.returnItem();
-        assertEquals(new Book("World War Z", "Max Brooks", "2006"), returnedMovie);
+        assertEquals(new Movie("World War Z", "Marc Forster", "2013", "9"), returnedMovie);
         assertEquals("Available",returnedMovie.getStatus());
-        assertEquals(3,moviesLibrary.sizeAvailable());
+        assertEquals(4,moviesLibrary.sizeAvailable());
         assertEquals("Input a movie (id):  Thank you for returning the movie.\n",outContent.toString());
     }
 
@@ -174,7 +174,7 @@ public class BibliotecaMovieTests {
         moviesLibrary.returnItem();
 
         assertEquals("Input a movie (id):  That is not a valid movie to return.\n", outContent.toString());
-        assertEquals(3,moviesLibrary.sizeAvailable());
+        assertEquals(4,moviesLibrary.sizeAvailable());
     }
 
 
